@@ -34,7 +34,7 @@ module load cuda-12.2.2
 
 # basecall the simplex reads
 xargs -a ~/data/danionella/pod5_simplex_list.txt \
-	bash -c 'dorado basecaller sup@latest,5mCG_5hmCG > simplex_SUPlatest_calls.bam'
+	bash -c 'dorado basecaller sup@latest,5mCG_5hmCG "$@" > simplex_SUPlatest_calls.bam'
 
 
 
