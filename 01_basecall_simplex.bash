@@ -15,7 +15,11 @@
 
 # set variables
 wkdir=/gpfs01/home/mbzlld/data/danionella
-cd $wkdir
+
+
+# then make a directory for the basecalled files (only if it does not already exist)
+mkdir -p $wkdir/basecalls
+cd $wkdir/basecalls
 
 
 # make a list of the pod5 files
@@ -26,11 +30,6 @@ sed '/duplex/d' ~/data/danionella/pod5_list.txt > ~/data/danionella/pod5_simplex
 
 # load cuda module
 module load cuda-12.2.2
-
-
-# then make a directory for the basecalled files (only if it does not already exist)
-mkdir -p $wkdir/basecalls
-cd $wkdir/basecalls
 
 
 # basecall the simplex reads
