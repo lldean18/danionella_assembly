@@ -49,6 +49,7 @@ module load cuda-12.2.2
 # basecall the simplex reads
 dorado basecaller \
 	sup@latest,5mCG_5hmCG \
+	--recursive \
        	$pod5_dir > simplex_SUP_calls_${SLURM_ARRAY_TASK_ID}.bam
 
 
