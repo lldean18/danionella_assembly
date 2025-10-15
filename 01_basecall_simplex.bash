@@ -19,8 +19,13 @@
 wkdir=/gpfs01/home/mbzlld/data/danionella
 config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_basecalling_array_config.txt
 
+## make a list of all the pod5 files
+#find /share/deepseq/matt/danionella -type f -name "*.pod5*" > ~/data/danionella/pod5_list.txt
+## make a list from this with only the simplex files
+#sed '/duplex/d' ~/data/danionella/pod5_list.txt > ~/data/danionella/pod5_simplex_list.txt
 
 ## make the config file (beforehand so its not overwritten with every array item)
+## make this by using the list of all simplex files above to see which dirs the pod5's are in
 #echo "1 /share/deepseq/matt/danionella/ic_208
 #2 /share/deepseq/matt/danionella/ic_206" > $config
 
@@ -29,12 +34,6 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_base
 # then make a directory for the basecalled files (only if it does not already exist)
 mkdir -p $wkdir/basecalls
 cd $wkdir/basecalls
-
-
-## make a list of the pod5 files
-#find /share/deepseq/matt/danionella -type f -name "*.pod5*" > ~/data/danionella/pod5_list.txt
-## make a list from this with only the simplex files
-#sed '/duplex/d' ~/data/danionella/pod5_list.txt > ~/data/danionella/pod5_simplex_list.txt
 
 
 
