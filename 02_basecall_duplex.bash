@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --gres=gpu:1
 #SBATCH --mem=256g
-#SBATCH --time=100:00:00
+#SBATCH --time=80:00:00
 #SBATCH --job-name=danio_duplex_basecall
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 #SBATCH --array=1-2
