@@ -15,7 +15,7 @@
 
 # set working directory and move to it
 wkdir=/gpfs01/home/mbzlld/data/danionella/basecalls
-
+cd $wkdir
 
 # combine fastq.gz files into one
 cat simplex_SUP_calls_1.fastq.gz \
