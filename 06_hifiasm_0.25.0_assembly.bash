@@ -25,7 +25,7 @@ wkdir=/gpfs01/home/mbzlld/data/danionella
 # set the attempt number for naming the output directory of each try
 attempt=1
 # then set the reads file that was used in that attempt
-reads=$wkdir/basecalls/
+reads=$wkdir/basecalls/ALL_simplex.fastq.gz
 
 # print a line to the slurm output that says exactly what was done on this run
 echo "This is hifiasm version 0.25.0 running on the file $reads and saving the output to the directory $wkdir/hifiasm_asm$attempt"
@@ -46,3 +46,5 @@ awk '/^S/{print ">"$2;print $3}' ONTasm.bp.p_ctg.gfa > ONTasm.bp.p_ctg.fasta
 
 # deactivate conda
 conda deactivate
+
+
