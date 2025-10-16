@@ -11,19 +11,19 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=bam2fastq
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=1-34
+#SBATCH --array=1-6
 
 # set variables
 wkdir=/gpfs01/home/mbzlld/data/danionella
 config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_bam_convert_array_config.txt
 
 
-##### GENERATE THE ARRAY CONFIG FILE #####
-# generate list of file paths for the array config
-find $wkdir -type f -name "*.bam" > $config
-# add array numbers to config file
-awk '{print NR,$0}' $config > ~/tmp && mv ~/tmp $config
-
+###### GENERATE THE ARRAY CONFIG FILE #####
+## generate list of file paths for the array config
+#find $wkdir -type f -name "*.bam" > $config
+## add array numbers to config file
+#awk '{print NR,$0}' $config > ~/tmp && mv ~/tmp $config
+## then I manually edited the config to remove the two original duplex bam files prior to tag extraction with samtools
 
 
 # extract the bam file paths and names from the config file
