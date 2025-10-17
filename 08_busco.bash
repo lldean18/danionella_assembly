@@ -29,7 +29,8 @@ source $HOME/.bash_profile
 
 # load conda environment
 #conda create --name busco5.7.1 busco=5.7.1 -y
-conda activate busco5.7.1
+#conda activate busco5.7.1
+conda activate busco
 
 # decide what lineage dataset you will use for your species
 #busco --list-datasets
@@ -47,7 +48,8 @@ busco \
 --mode genome \
 --out buscos_${assembly%.*} \
 --out_path $wkdir/$assembly_dir \
---cpu 16
+--cpu 16 \
+-f
 
 # deactivate conda
 conda deactivate
