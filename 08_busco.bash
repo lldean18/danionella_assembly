@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=158g
+#SBATCH --mem=80g
 #SBATCH --time=12:00:00
 #SBATCH --job-name=busco
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
@@ -32,6 +32,8 @@ source $HOME/.bash_profile
 #conda activate busco5.7.1
 #conda create --name busco_new busco
 conda activate busco_new
+# fix for the java error bug that has popped up in busco
+#sed -i 's/z="-Xmx120m"/z="-Xmx32g"/' ~/software_bin/miniconda3/envs/busco_new/bin/stats.sh
 #conda activate busco
 
 # decide what lineage dataset you will use for your species
