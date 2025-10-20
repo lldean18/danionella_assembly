@@ -32,8 +32,9 @@ fastq=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $co
 
 
 
-
-
+# the whole thing fails because the models just won't download! Grr
+# First need to download the models because that fails in the job
+#dorado download --models all --models-directory /gpfs01/home/mbzlld/data/dorado_models
 
 
 
