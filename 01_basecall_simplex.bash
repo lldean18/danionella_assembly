@@ -26,8 +26,8 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_base
 
 ## make the config file (beforehand so its not overwritten with every array item)
 ## make this by using the list of all simplex files above to see which dirs the pod5's are in
-#echo "1 /share/deepseq/matt/danionella/ic_208
-#2 /share/deepseq/matt/danionella/ic_206" > $config
+echo "1 /share/deepseq/matt/danionella/ic_208 ic_208
+2 /share/deepseq/matt/danionella/ic_206 ic_206" > $config
 
 
 
@@ -37,8 +37,9 @@ cd $wkdir/basecalls
 
 
 
-# extract the directories from the config file
+# extract the directories and the run names from the config file
 pod5_dir=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $config)
+run=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $3}' $config)
 
 
 # load cuda module
@@ -49,7 +50,7 @@ module load cuda-12.2.2
 dorado basecaller \
 	sup@latest,5mCG_5hmCG \
 	--recursive \
-       	$pod5_dir > simplex_SUP_calls_${SLURM_ARRAY_TASK_ID}.bam
+       	$pod5_dir > simplex_SUP_calls_$run.bam
 
 
 
