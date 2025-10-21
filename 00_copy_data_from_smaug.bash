@@ -24,14 +24,14 @@ srun --partition defq --cpus-per-task 1 --mem 50g --time 168:00:00 --pty bash
 rsync -rvh --progress \
 mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_207/danionellaA_ULK114_recovered/20240801_1516_2G_PAW68934_b978428c/pod5 \
 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_207/
-# RUNNING
+# COMPLETED
 
 
 # ic_208
 rsync -rvh --progress \
 mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_208/danionellaA_ULK114/20240805_1303_2G_PAW67982_1d1c1c5b/pod5 \
 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_208/
-
+# RUNNING
 
 
 ### Fish B ###
@@ -39,8 +39,16 @@ mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_208/danionellaA_ULK114/20240805_1
 
 # ic_206
 rsync -rvh --progress \
-mbzlld@10.157.200.14:
+mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_206/danionellaB_ULK114_recut/20240813_1227_1G_PAW67982_053b98a4/pod5 \
+/gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_206/
 
 
 # ic_205 (duplex)
+rsync -rvh --progress \
+mbzlld@10.157.200.14:
+
+
+
+
+
 
