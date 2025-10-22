@@ -1,7 +1,7 @@
 #!/bin/bash
 # Laura Dean
 # file written for running on the UoN HPC Ada
-# 14/10/25
+# 22/10/25
 
 #SBATCH --partition=ampereq
 #SBATCH --nodes=1
@@ -26,9 +26,14 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_base
 
 ## make the config file (beforehand so its not overwritten with every array item)
 ## make this by using the list of all simplex files above to see which dirs the pod5's are in
-echo "1 /share/deepseq/matt/danionella/ic_208 ic_208
-2 /share/deepseq/matt/danionella/ic_206 ic_206" > $config
+#echo "1 /share/deepseq/matt/danionella/ic_208 ic_208
+#2 /share/deepseq/matt/danionella/ic_206 ic_206" > $config
 
+
+# make the config file with the new downloaded pod5 files
+echo "1 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_207 ic_207
+2 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_208 ic_208
+3 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_206 ic_206" > $config
 
 
 # then make a directory for the basecalled files (only if it does not already exist)
