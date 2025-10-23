@@ -12,7 +12,7 @@
 #SBATCH --time=100:00:00
 #SBATCH --job-name=danio_basecall
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=1-2
+#SBATCH --array=1-3
 
 
 # set variables
@@ -30,10 +30,10 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_base
 #2 /share/deepseq/matt/danionella/ic_206 ic_206" > $config
 
 
-# make the config file with the new downloaded pod5 files
-echo "1 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_207 ic_207
-2 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_208 ic_208
-3 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_206 ic_206" > $config
+## make the config file with the new downloaded pod5 files
+#echo "1 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_207 ic_207
+#2 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_A/ic_208 ic_208
+#3 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_206 ic_206" > $config
 
 
 # then make a directory for the basecalled files (only if it does not already exist)
