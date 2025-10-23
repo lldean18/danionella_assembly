@@ -41,7 +41,7 @@ mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_208/danionellaA_ULK114/20240805_1
 rsync -rvh --progress \
 mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_206/danionellaB_ULK114_recut/20240813_1227_1G_PAW67982_053b98a4/pod5 \
 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_206/
-# RUNNING
+# COMPLETED
 
 
 
@@ -50,6 +50,9 @@ mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_206/danionellaB_ULK114_recut/2024
 rsync -rvh --progress \
 mbzlld@10.157.200.14:/mnt/waterprom/ic_runs/ic_205/danionellaB_duplex/20240724_1050_1G_PAU74023_daf962d9/pod5 \
 /gpfs01/home/mbzlld/data/danionella/pod5s/fish_B/ic_205/duplex/
+# RUNNING
+
+
 
 # ic_205 (duplex2)
 rsync -rvh --progress \
