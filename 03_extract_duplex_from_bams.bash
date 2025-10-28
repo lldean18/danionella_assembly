@@ -14,7 +14,7 @@
 
 
 # create list of files to loop over
-bams=( /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_1.bam /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_2.bam )
+bams=( /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex.bam /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex2.bam )
 
 
 
@@ -26,14 +26,14 @@ for bam in ${bams[@]}
 
 do
 
-## extract duplex reads from bam files
-#samtools view \
-#--tag dx:1 \
-#--threads 48 \
-#-O bam \
-#--write-index \
-#--output ${bam%.*}_duplex.bam \
-#$bam
+# extract duplex reads from bam files
+samtools view \
+--tag dx:1 \
+--threads 48 \
+-O bam \
+--write-index \
+--output ${bam%.*}_duplex.bam \
+$bam
 
 # extract simplex reads from bam files
 samtools view \
