@@ -44,6 +44,7 @@ module load cuda-12.2.2
 # basecall the duplex reads
 dorado duplex \
 	sup@latest,5mCG_5hmCG \
+	--models-directory /gpfs01/home/mbzlld/data/dorado_models \
 	--recursive \
        	$pod5_dir > duplex_SUP_calls_$run.bam
 
