@@ -53,11 +53,12 @@ module load cuda-12.2.2
 
 # basecall the simplex reads
 dorado basecaller \
-	sup@latest,5mCG_5hmCG \
+	/gpfs01/home/mbzlld/data/dorado_models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0 \
 	--recursive \
        	$pod5_dir > simplex_SUP_calls_$run.bam
 
 
+#	sup@latest,5mCG_5hmCG \
 
 # unload module
 module unload cuda-12.2.2
