@@ -11,7 +11,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=bam2fastq
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=1-2
+#SBATCH --array=1-3
 
 # set variables
 wkdir=/gpfs01/home/mbzlld/data/danionella
@@ -25,6 +25,7 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_bam_convert_
 #awk '{print NR,$0}' $config > ~/tmp && mv ~/tmp $config
 ## then I manually edited the config to remove the two original duplex bam files prior to tag extraction with samtools
 ## also removed the unfinished basecalls to progress with fish A for now
+## now running for fish B only
 
 # extract the bam file paths and names from the config file
 bam=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $config)
