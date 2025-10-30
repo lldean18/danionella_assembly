@@ -35,7 +35,7 @@ source $HOME/.bash_profile
 # wget http://complex.zesoi.fer.hr/data/downloads/model_v0.1.pt
 
 # set variables
-raw_fastq=/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/basecalls/all_simplex_simplex.fastq.gz
+raw_fastq=/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/basecalls/FishA_ALL_simplex.fastq.gz
 
 # preprocess reads input fastq, output prefix, number of threads, number of parts to split job into (if low mem)
 /gpfs01/home/mbzlld/software_bin/herro/scripts/preprocess.sh $raw_fastq ${raw_fastq%.*.*}_preprocessed 20 1
