@@ -8,8 +8,8 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --gres=gpu:1
-#SBATCH --mem=256g
-#SBATCH --time=100:00:00
+#SBATCH --mem=747g
+#SBATCH --time=168:00:00
 #SBATCH --job-name=dorado_correct
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
