@@ -17,16 +17,18 @@
 wkdir=/gpfs01/home/mbzlld/data/danionella/basecalls
 cd $wkdir
 
-# combine fastq.gz files into one for fish A
-cat simplex_SUP_calls_ic_207.fastq.gz \
-	simplex_SUP_calls_ic_208.fastq.gz > FishA_ALL_simplex.fastq.gz
+## combine fastq.gz files into one for fish A
+#cat simplex_SUP_calls_ic_207.fastq.gz \
+#	simplex_SUP_calls_ic_208.fastq.gz > FishA_ALL_simplex.fastq.gz
 
-# combine fastq.gz files into one for fish B
+# combine simplex fastq.gz files into one for fish B
+cat simplex_SUP_calls_ic_206.fastq.gz \
+	duplex_SUP_calls_duplex_simplex.fastq.gz \
+	duplex_SUP_calls_duplex2_simplex.fastq.gz > FishB_ALL_simplex.fastq.gz
 
 
-
-#cat duplex_SUP_calls_1_duplex.fastq.gz \
-#	duplex_SUP_calls_2_duplex.fastq.gz > all_duplex_duplex.fastq.gz
+cat duplex_SUP_calls_duplex_duplex.fastq.gz \
+	duplex_SUP_calls_duplex2_duplex.fastq.gz > FishB_ALL_duplex_duplex.fastq.gz
 
 
 
