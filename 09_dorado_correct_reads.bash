@@ -19,7 +19,8 @@ wkdir=/gpfs01/home/mbzlld/data/danionella/basecalls
 cd $wkdir
 
 # specify the file of reads to be corrected
-fastq=FishA_ALL_simplex.fastq.gz
+#fastq=FishA_ALL_simplex.fastq.gz
+fastq=FishB_ALL_simplex.fastq.gz
 
 
 
@@ -39,6 +40,7 @@ echo "correcting reads from $fastq"
 
 dorado correct \
 	--device cuda:all \
+	--model-path /gpfs01/home/mbzlld/data/dorado_models/dorado_models \
 	$fastq | gzip > ${fastq%.*.*}_corrected.fastq.gz
 
 
