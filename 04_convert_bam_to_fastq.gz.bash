@@ -11,7 +11,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=bam2fastq
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=1-3
+#SBATCH --array=1-5
 
 # set variables
 wkdir=/gpfs01/home/mbzlld/data/danionella
