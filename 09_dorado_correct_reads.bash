@@ -40,10 +40,12 @@ echo "correcting reads from $fastq"
 
 dorado correct \
 	--device cuda:all \
-	--model-path /gpfs01/home/mbzlld/data/dorado_models/dorado_models \
+	--model-path /gpfs01/home/mbzlld/data/dorado_models/dorado_models/herro-v1 \
 	$fastq | gzip > ${fastq%.*.*}_corrected.fastq.gz
 
 
+
+	
 # unload modules
 module unload cuda-12.2.2
 
