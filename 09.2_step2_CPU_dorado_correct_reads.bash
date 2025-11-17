@@ -34,6 +34,7 @@ echo "correcting reads from ${fastq%.*.*}_overlaps.paf"
 
 # create the paf file
 dorado correct \
+	$fastq \
 	--model-path /gpfs01/home/mbzlld/data/dorado_models/dorado_models/herro-v1 \
 	--from-paf \
 	${fastq%.*.*}_overlaps.paf | gzip > ${fastq%.*.*}_corrected.fa.gz 
