@@ -20,7 +20,8 @@ cd $wkdir
 
 # specify the file of reads to be corrected
 #fastq=FishA_ALL_simplex.fastq.gz
-fastq=FishB_ALL_simplex.fastq.gz
+#fastq=FishB_ALL_simplex.fastq.gz
+fastq=FishB_ALL_simplex_bgzip.fastq.gz
 
 
 
