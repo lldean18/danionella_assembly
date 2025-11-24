@@ -3,6 +3,10 @@
 # 14/11/25
 # for running on the UoN HPC Ada
 
+# script to run dorado correct on a fastq file
+# paf file needs to have already been created for
+# this script to run
+
 #SBATCH --partition=ampereq
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -22,6 +26,7 @@ cd $wkdir
 #fastq=FishA_ALL_simplex.fastq.gz
 #fastq=FishB_ALL_simplex.fastq.gz
 fastq=FishB_ALL_simplex_bgzip.fastq.gz
+
 
 
 
