@@ -1,6 +1,6 @@
 #!/bin/bash
 # Laura Dean
-# 14/11/25
+# 26/11/25
 # for running on the UoN HPC Ada
 
 # script to run dorado correct on a fastq file
@@ -25,7 +25,7 @@ cd $wkdir
 # specify the file of reads to be corrected
 #fastq=FishA_ALL_simplex.fastq.gz
 #fastq=FishB_ALL_simplex.fastq.gz
-fastq=FishB_ALL_simplex_bgzip.fastq.gz
+fastq=FishB_ALL_simplex.fastq
 
 
 
@@ -36,14 +36,13 @@ fastq=FishB_ALL_simplex_bgzip.fastq.gz
 module load cuda-12.2.2
 
 # write the name of the file being converted
-echo "correcting reads from ${fastq%.*.*}_overlaps.paf"
+echo "correcting reads from ${fastq%.*}_overlaps.paf"
 
 # create the paf file
 dorado correct \
 	$fastq \
 	--model-path /gpfs01/home/mbzlld/data/dorado_models/dorado_models/herro-v1 \
-	--from-paf \
-	${fastq%.*.*}_overlaps.paf | gzip > ${fastq%.*.*}_corrected.fa.gz 
+	--from-paf FishB_ALL_simplex_overlaps.paf | gzip > ${fastq%.*}_corrected.fa.gz 
 
 
 # unload cuda module
