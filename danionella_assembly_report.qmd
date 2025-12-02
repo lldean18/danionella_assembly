@@ -1,0 +1,43 @@
+---
+title: "Danionella_assembly_report"
+author: "Laura Dean"
+format: html
+editor: visual
+embed-resources: true
+---
+
+# Fish B
+
+## Raw reads into hifiasm ONT mode
+
+All simplex reads, including all from ic_206 (ultra long protocol) and simplex extracted from ic_205 (duplex run) merged and input to hifiasm version 0.25.0
+
+assembly stats:
+
+![](images/clipboard-538062231.png)
+
+busco results:
+
+![](images/clipboard-162107218.png)
+
+## Dorado correct + hifiasm
+
+All simplex reads, including all from ic_206 (ultra long protocol) and simplex extracted from ic_205 (duplex run) merged and corrected with Dorado correct, then assembled with hifiasm v0.25.0 in normal mode (ONT mode can only run on reads in fastq format & dorado correct outputs corrected reads as fasta)
+
+assembly stats:
+
+![](images/clipboard-1247254372.png)
+
+busco results:
+
+![](images/clipboard-411811055.png)
+
+## Matt's best previous assembly
+
+Not sure exactly what Matt did, I'm guessing this might have only been reads from the ic_206 ultra long run.
+
+assembly stats:
+
+![busco results:](images/clipboard-321862834.png)
+
+![](images/clipboard-2333034697.png)
