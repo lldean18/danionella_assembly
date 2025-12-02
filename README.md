@@ -12,3 +12,5 @@ ic_205 are duplex runs.
 
 All of the simplex runs are with the UL protocol
 
+So far the best assembly seems to be for fish B with all simplex reads (including those extracted from the duplex runs) directly input into hifiasm 0.25.0 in ONT mode
+
