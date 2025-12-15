@@ -2,6 +2,9 @@
 import argparse
 import sys
 from pathlib import Path
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
 
 def parse_fasta_lengths(path):
     lengths = []
@@ -89,6 +92,10 @@ def main():
     # plot
     import matplotlib.pyplot as plt
     fig, ax1 = plt.subplots(figsize=(9, 5))
+
+    # force plain integers on x axis (no scientific notation)
+    ax1.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f"{int(x):,}"))
+
 
     # N50 line
     ax1.plot(xs, ys_mbp, marker="o", color="tab:blue", label="N50 (after cutoff)")
