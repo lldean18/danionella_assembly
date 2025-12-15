@@ -12,7 +12,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=150g
-#SBATCH --time=6:00:00
+#SBATCH --time=3:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
 
@@ -28,11 +28,10 @@ cd $wkdir
 
 
 # filter the chrs that don't exist in danionella out of the zebrafish asm
-echo "chromosome4
+echo "chromosome_4
 chromosome_16
 chromosome_22
-chromosome_24
-" > chrs_not_in_danionella.txt
+chromosome_24" > chrs_not_in_danionella.txt
 conda activate seqkit
 seqkit grep -v -f chrs_not_in_danionella.txt $assembly1 > zebrafish_asm_filtered.fasta
 conda deactivate
@@ -49,7 +48,7 @@ assembly1=zebrafish_asm_filtered.fasta
 
 # align assemblies to be compared
 conda activate minimap2
-minimap2 -ax asm20 -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
+minimap2 -ax asm10 -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
 samtools index alignment.bam
 conda deactivate
 
