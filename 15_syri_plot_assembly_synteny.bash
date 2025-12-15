@@ -27,6 +27,18 @@ mkdir -p $wkdir
 cd $wkdir
 
 
+# filter the chrs that don't exist in danionella out of the zebrafish asm
+echo "chromosome4
+chromosome_16
+chromosome_22
+chromosome_24
+" > chrs_not_in_danionella.txt
+conda activate seqkit
+seqkit grep -v -f chrs_not_in_danionella.txt $assembly1 > zebrafish_asm_filtered.fasta
+conda deactivate
+
+assembly1=zebrafish_asm_filtered.fasta
+
 ################################################
 ### Align assemblies that will be compared #####
 ################################################
@@ -37,7 +49,7 @@ cd $wkdir
 
 # align assemblies to be compared
 conda activate minimap2
-minimap2 -ax asm5 -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
+minimap2 -ax asm20 -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
 samtools index alignment.bam
 conda deactivate
 
