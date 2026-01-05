@@ -21,13 +21,25 @@ conda deactivate
 # convert the paf alignment file to input tsv for croder
 awk 'BEGIN{OFS="\t"}
 {
-  pid = ($10/$11)*100
-  print $6, $8, $9, $1, $3, $4, $5, pid
+  idy = ($10/$11)*100
+  print \
+    $8,  $9, \
+    $3,  $4, \
+    $7,  $2, \
+    idy, \
+    $6,  $1, \
+    $11, \
+    0
 }' aln.paf > chroder.coords.tsv
 
-# filter for >=10 kb alignments, >=90% identity
-awk '$2-$1 >= 10000 && $8 >= 90' chroder.coords.tsv \
-> chroder.coords.filtered.tsv
+##############################################
+# produce alignments 2nd attempt with mummer #
+##############################################
+
+conda activate mummer
+nucmer --maxmatch $ref $asm -p asm
+show-coords -THrd asm.delta > chroder.coords.tsv
+conda deactivate
 
 ###########################
 # scaffold with syri tool #
@@ -41,5 +53,8 @@ conda deactivate
 
 
 conda activate syri1.7.1
-chroder chroder.coords.filtered.tsv $ref $asm -o chroder
+chroder chroder.coords.tsv $ref $asm -o chroder
+
+
+
 
