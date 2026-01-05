@@ -55,8 +55,13 @@ assembly2=ragtag.scaffolds_only_reordered.fasta
 
 # align assemblies to be compared
 conda activate minimap2
-minimap2 -ax asm10 -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
+minimap2 -ax map-ont -t 16 --eqx $assembly1 $assembly2 | samtools sort -O BAM - > alignment.bam
+samtools view alignment.bam | awk '{print $1,$2,$3}' # troubleshooting
+# # remove all but primary mapped reads
+# samtools view -b -F 0x904 alignment.bam > temp && mv temp alignment.bam
+# samtools view alignment.bam | awk '{print $1,$2,$3}' # troubleshooting
 samtools index alignment.bam
+
 conda deactivate
 
 # write the names of the assemblies to a file for use by plotsr
@@ -70,7 +75,9 @@ echo -e ""$assembly1"\tZebrafish
 echo "identifying structural rearrangements between assemblies with syri..."
 # create your syri environment
 #conda create --name syri1.7.1 syri -y
-conda activate syri1.7.1
+#conda activate syri1.7.1
+#conda create --name syri_new syri -y
+conda activate syri_new
 
 # Run syri to find structural rearrangements between your assemblies
 echo "running syri for asm1 and asm2..."
@@ -79,6 +86,7 @@ syri \
 -r $assembly1 \
 -q $assembly2 \
 -F B \
+--nc 16 \
 --dir $wkdir \
 --prefix asm1_asm2_
 
