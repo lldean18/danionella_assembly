@@ -1,9 +1,11 @@
-
+#!/bin/bash
+# record of code trying to plot the danionella assembly, scaffolded with
+# zebrafish against the zebrafish assembly in a synteny plot
 
 # setup env
 conda activate tmux
 tmux new -t syri
-srun --partition defq --cpus-per-task 16 --mem 80g --time 12:00:00 --pty bash
+srun --partition defq --cpus-per-task 16 --mem 180g --time 24:00:00 --pty bash
 
 wkdir=/gpfs01/home/mbzlld/data/danionella/try2_zfish_synteny
 cd $wkdir
