@@ -40,24 +40,45 @@ asm=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg.fast
 ##############################################
 
 conda activate mummer
-nucmer --maxmatch $ref $asm -p asm
+nucmer $ref $asm -p asm
 show-coords -THrd asm.delta > chroder.coords.tsv
 conda deactivate
+
+##########################################################################
+# filter out all contigs from danionella that do not match the zebrafish #
+##########################################################################
+
+cut -f11 chroder.coords.tsv | sort -u > qry.contigs.with.alignments.txt
+# then delete the line for the contig that is still causing errors
+sed -i '/ptg000022l/d' qry.contigs.with.alignments.txt
+conda activate seqkit
+seqkit grep -f qry.contigs.with.alignments.txt $asm > asm.filtered.fa
+# this kept 111 of 350 contigs in the danionella asm
+conda deactivate
+
+# now filter them from the coords file
+awk 'NR==FNR {keep[$1]; next} ($11 in keep)' \
+  qry.contigs.with.alignments.txt \
+  chroder.coords.tsv > chroder.coords.filtered.tsv
 
 ###########################
 # scaffold with syri tool #
 ###########################
 
-# index asms
-conda activate samtools
-samtools faidx $ref
-samtools faidx $asm
-conda deactivate
+## # index asms
+## # don't think this was necessary in the end but ran it anyway
+## conda activate samtools
+## samtools faidx $ref
+## samtools faidx $asm
+## samtools faidx asm.filtered.fa
+## conda deactivate
 
 
 conda activate syri1.7.1
-chroder chroder.coords.tsv $ref $asm -o chroder
+# scaffold the danionella asm using the zebrafish as a ref
+chroder chroder.coords.filtered.tsv $ref asm.filtered.fa -o chroder
 
+# run syri to identify synteny
 
 
 
