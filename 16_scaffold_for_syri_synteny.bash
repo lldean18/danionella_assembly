@@ -99,7 +99,7 @@ conda activate syri_new
 
 # Run syri to find structural rearrangements between your assemblies
 syri \
--c alignment.bam \
+-c out.bam \
 -r $ref \
 -q asm.filtered.fa \
 -F B \
