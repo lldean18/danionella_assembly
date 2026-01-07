@@ -83,9 +83,12 @@ chroder chroder.coords.filtered.tsv $ref asm.filtered.fa -o chroder
 ########################################
 
 conda activate minimap2
-minimap2 -ax asm5 --eqx $ref asm.filtered.fa | samtools view -b - > out.bam
-conda deactivate 
+minimap2 -ax asm5 --secondary=no -t 16 $ref asm.filtered.fa | samtools sort -o syri.bam
+samtools index syri.bam
+conda deactivate
 
+minimap2 -ax asm5 --secondary=no -t 16 $ref asm.filtered.fa \
+| samtools sort -o syri.bam
 
 ##############################################################
 ### Identify structural rearrangements between assemblies ####
@@ -99,7 +102,7 @@ conda activate syri_new
 
 # Run syri to find structural rearrangements between your assemblies
 syri \
--c out.bam \
+-c syri.bam \
 -r $ref \
 -q asm.filtered.fa \
 -F B \
