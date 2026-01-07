@@ -65,20 +65,71 @@ awk 'NR==FNR {keep[$1]; next} ($11 in keep)' \
 # scaffold with syri tool #
 ###########################
 
-## # index asms
-## # don't think this was necessary in the end but ran it anyway
-## conda activate samtools
-## samtools faidx $ref
-## samtools faidx $asm
-## samtools faidx asm.filtered.fa
-## conda deactivate
+# index asms
+# don't think this was necessary in the end but ran it anyway
+conda activate samtools
+samtools faidx $ref
+samtools faidx $asm
+samtools faidx asm.filtered.fa
+conda deactivate
 
 
 conda activate syri1.7.1
 # scaffold the danionella asm using the zebrafish as a ref
 chroder chroder.coords.filtered.tsv $ref asm.filtered.fa -o chroder
 
-# run syri to identify synteny
+########################################
+# align the scaffolded asm and the ref #
+########################################
 
+conda activate minimap2
+minimap2 -ax asm5 --eqx $ref asm.filtered.fa | samtools view -b - > out.bam
+conda deactivate 
+
+
+##############################################################
+### Identify structural rearrangements between assemblies ####
+##############################################################
+
+# write the names of the assemblies to a file for use by plotsr
+echo -e ""$ref"\tZebrafish
+"$wkdir/asm.filtered.fa"\tDanionella" > plotsr_assemblies_list.txt
+
+conda activate syri_new
+
+# Run syri to find structural rearrangements between your assemblies
+syri \
+-c alignment.bam \
+-r $ref \
+-q asm.filtered.fa \
+-F B \
+--nc 16 \
+--dir $wkdir \
+--prefix Zeb_Dan_
+
+conda deactivate
+
+###########################
+### create plotsr plot ####
+###########################
+
+## conda activate plotsr1.1.0
+## 
+## plotsr \
+## --sr asm1_asm2_syri.out \
+## --genomes plotsr_assemblies_list.txt \
+## -o plotsr_plot.png
+
+### customise the plot for the paper
+#plotsr \
+#       -o plotsr_plot_MS.png \
+#       --sr asm1_asm2_syri.out \
+#       --genomes plotsr_assemblies_list.txt \
+#       -H 23 \
+#       -W 20 \
+#       -f 14 \
+#       --cfg base.cfg
+
+conda deactivate
 
 
