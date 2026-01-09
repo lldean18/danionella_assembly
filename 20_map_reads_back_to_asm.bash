@@ -31,7 +31,7 @@ minimap2 \
 	--split-prefix temp_prefix \
 	-t 32 \
 	-o ${assembly%.*}_mapped_raw_reads.sam \
-	$reference $reads
+	$assembly $reads
 
 
 # sort and index the sam file and convert to bam format
