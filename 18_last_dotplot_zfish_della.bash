@@ -20,12 +20,13 @@ conda activate last
 ####### SET VARIABLES #######
 reference=/gpfs01/home/mbzlld/data/danionella/GCF_049306965.1_GRCz12tu_genomic.fna.gz
 #assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_ragtag/ragtag.scaffold.fasta
-#assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_100kb.fasta
-assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_ragtag/ragtag.scaffolds_only.fasta
+assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_100kb.fasta
+#assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_ragtag/ragtag.scaffolds_only.fasta
 
 
 
 ####### RUN ANALYSIS ########
+# -P = number of threads
 ## # Create database from the reference genome
 ## # -uRY128 combined flag - makes it faster but less sensitive: it'll miss tiny rearranged fragments. To find them, try -uRY4
 ## # -uRY16 seemed to work well
@@ -40,7 +41,7 @@ assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg
 # find score parameters for aligning the assembly to the reference
 last-train \
 	-P24 \
---revsym \
+	--revsym \
 	-C2 \
 	${reference%.*.*}_db \
 	$assembly > ${assembly%.*}hc.train
@@ -68,7 +69,28 @@ last-dotplot \
 ${assembly%.*}one-to-one.maf \
 ${assembly%.*}dotplot.png
 
-# -P = number of threads
+
+last-dotplot \
+--verbose \
+--rot1=v \
+--rot2=h \
+--fontsize=10 \
+-1 'NC_133187*' \
+-1 'NC_133190*' \
+-2 'ptg000012*' \
+${assembly%.*}one-to-one.maf \
+${assembly%.*}dotplot2.png 
+
+
+last-dotplot \
+--verbose \
+--rot1=v \
+--rot2=h \
+--fontsize=10 \
+-2 'ptg000006*' \
+${assembly%.*}one-to-one.maf \
+${assembly%.*}dotplot3.png
+
 
 
 conda deactivate
