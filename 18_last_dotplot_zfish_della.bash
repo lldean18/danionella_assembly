@@ -66,6 +66,8 @@ last-dotplot \
 --rot1=v \
 --rot2=h \
 --fontsize=10 \
+--sort1=3 \
+--sort2=1 \
 ${assembly%.*}one-to-one.maf \
 ${assembly%.*}dotplot.png
 
@@ -82,15 +84,27 @@ ${assembly%.*}one-to-one.maf \
 ${assembly%.*}dotplot2.png 
 
 
+################################################################
+################################################################
+
+SCORE=2500
+
+# get one to one alignments with filtering for slignment score
+last-split \
+        -r \
+        --score=$SCORE \
+        ${assembly%.*}many-to-one.maf > ${assembly%.*}one-to-one_score$SCORE.maf
+
+# make a dotplot
 last-dotplot \
 --verbose \
 --rot1=v \
 --rot2=h \
 --fontsize=10 \
--2 'ptg000006*' \
-${assembly%.*}one-to-one.maf \
-${assembly%.*}dotplot3.png
-
+--sort1=3 \
+--sort2=1 \
+${assembly%.*}one-to-one_score$SCORE.maf \
+${assembly%.*}dotplot_score$SCORE.png
 
 
 conda deactivate
