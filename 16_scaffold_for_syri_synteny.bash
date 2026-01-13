@@ -83,27 +83,37 @@ chroder chroder.coords.filtered.tsv $ref asm.filtered.fa -o chroder
 ########################################
 
 conda activate minimap2
-minimap2 -ax asm5 --secondary=no -t 16 $ref asm.filtered.fa | samtools sort -o syri.bam
+minimap2 -ax asm5 --eqx --secondary=no -t 16 $ref asm.filtered.fa | samtools sort -o syri.bam
 samtools index syri.bam
 conda deactivate
 
-minimap2 -ax asm5 --secondary=no -t 16 $ref asm.filtered.fa \
-| samtools sort -o syri.bam
+# filter out the chrs in the ref that have no match
+conda activate samtools
+samtools idxstats syri.bam | awk '$3>0 {print $1}' > ref.keep.txt
+conda deactivate
+
+conda activate seqkit
+seqkit grep -f ref.keep.txt $ref > ref.filtered.fa
+conda deactivate
+
+conda activate samtools
+samtools faidx ref.filtered.fa
+conda deactivate
 
 ##############################################################
 ### Identify structural rearrangements between assemblies ####
 ##############################################################
 
 # write the names of the assemblies to a file for use by plotsr
-echo -e ""$ref"\tZebrafish
+echo -e ""$wkdir/ref.filtered.fa"\tZebrafish
 "$wkdir/asm.filtered.fa"\tDanionella" > plotsr_assemblies_list.txt
 
 conda activate syri_new
 
 # Run syri to find structural rearrangements between your assemblies
 syri \
--c syri.bam \
--r $ref \
+-c out.bam \
+-r ref.filtered.fa \
 -q asm.filtered.fa \
 -F B \
 --nc 16 \
