@@ -49,7 +49,7 @@ $genome
 cd tidk
 
 tidk plot \
---tsv ${genome%.*}_tidk_search.tsv
+--tsv ${genome%.*}_tidk_search_telomeric_repeat_windows.tsv
 
 conda deactivate
 
