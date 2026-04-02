@@ -22,13 +22,34 @@ conda activate tidk
 cd /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1
 genome=ONTasm.bp.p_ctg_100kb.fasta
 
+mkdir -p tidk
 
-# run the telomere explorer
-tidk explore \
---distance 0.5 \
---minimum 4 \
---maximum 12 \
-$genome > ${genome%.*}_tidk.tsv
+###  # run the telomere explorer
+###  tidk explore \
+###  --distance 0.5 \
+###  --minimum 4 \
+###  --maximum 12 \
+###  $genome > tidk/${genome%.*}_tidk.tsv
+
+###  ## build the database of telomeric sequences
+###  tidk build
+
+###  tidk find \
+###  --clade Cypriniformes \
+###  --output ${genome%.*}_tidk \
+###  --dir tidk \
+###  $genome
+
+tidk search \
+--string AACCCT \
+--output ${genome%.*}_tidk_search \
+--dir tidk \
+$genome
+
+cd tidk
+
+tidk plot \
+--tsv ${genome%.*}_tidk_search.tsv
 
 conda deactivate
 
