@@ -29,8 +29,8 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_duplex_basec
 
 
 # then make a directory for the basecalled files (only if it does not already exist)
-mkdir -p $wkdir/basecalls
-cd $wkdir/basecalls
+mkdir -p $wkdir/basecalls_methylation_CpG
+cd $wkdir/basecalls_methylation_CpG
 
 
 # extract the directories from the config file
@@ -46,6 +46,7 @@ dorado duplex \
 	sup@latest,5mCG_5hmCG \
 	--models-directory /gpfs01/home/mbzlld/data/dorado_models \
 	--recursive \
+	--reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
        	$pod5_dir > duplex_SUP_calls_$run.bam
 
 
