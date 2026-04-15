@@ -42,12 +42,12 @@ module load cuda-12.2.2
 
 
 # basecall the duplex reads
-dorado duplex \
+dorado basecaller \
 	sup@latest,5mCG_5hmCG \
 	--models-directory /gpfs01/home/mbzlld/data/dorado_models \
 	--recursive \
 	--reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
-       	$pod5_dir > duplex_SUP_calls_$run.bam
+       	$pod5_dir > duplex_as_simplex_SUP_calls_$run.bam
 
 
 
