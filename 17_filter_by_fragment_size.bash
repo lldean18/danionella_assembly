@@ -5,6 +5,7 @@
 
 assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg.fasta
 assembly=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg_ragtag/ragtag.scaffold.fasta
+assembly=/gpfs01/home/mbzlld/data/danionella/fish_A/hifiasm_asm1/ONTasm.bp.p_ctg.fasta
 
 conda activate seqtk
 
