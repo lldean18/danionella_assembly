@@ -33,7 +33,11 @@ ntsynt_viz.py \
 --normalize \
 --blocks ntSynt.k24.w1000.synteny_blocks.tsv \
 --fais consensus.fasta.fai ONTasm.bp.p_ctg.fasta.fai \
---prefix ribbon_plot
+--prefix ribbon_plot \
+--name_conversion name_conversion.tsv \
+--target-genome consensus.fasta \
+--no-arrow \
+--ribbon_adjust 1.5
 
 # unload software
 conda deactivate
