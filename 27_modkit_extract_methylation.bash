@@ -20,17 +20,30 @@ mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_A/methylation
 cd /gpfs01/home/mbzlld/data/danionella/fish_A/methylation
 
 
-# extract methylation information from aligned reads
+##  # extract methylation information from simplex aligned reads
+##  modkit pileup \
+##    /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_A/fish_A_simplex_SUP.bam \
+##    fish_A_simp_meth_0.85_comb.bed \
+##    --log-filepath fish_A_simp_0.85_modkit_comb.log \
+##    --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
+##    --threads 8 \
+##    --cpg \
+##    --combine-strands \
+##    --modified-bases 5mC 5hmC \
+##    --filter-threshold 0.85
+
+
+# extract methylation information from duplex aligned reads
 modkit pileup \
-  /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_A/fish_A_simplex_SUP.bam \
-  fish_A_simp_meth_0.85.bed \
-  --log-filepath fish_A_simp_0.85_modkit.log \
+  /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_A/fish_A_dup_dx1_SUP.bam \
+  fish_A_dup_meth.bed \
+  --log-filepath fish_A_dup_modkit.log \
   --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
   --threads 8 \
   --cpg \
-  --modified-bases 5mC 5hmC \
-  --filter-threshold 0.85
-
+  --duplex #\
+#  --filter-threshold 0.85
+#  --modified-bases 5mC 5hmC \
 
 conda deactivate
 
