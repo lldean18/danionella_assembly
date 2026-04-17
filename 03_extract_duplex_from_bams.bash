@@ -31,10 +31,12 @@ do
 samtools view \
 --tag dx:1 \
 --threads 48 \
--O bam \
---write-index \
---output /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_} \
-$bam
+-O bam $bam |
+samtools sort \
+--threads 48 \
+--output /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_}
+samtools index /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_}
+
 
 ##  # extract simplex reads from bam files
 ##  samtools view \
