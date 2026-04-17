@@ -29,7 +29,7 @@ modkit pileup \
   --threads 8 \
   --cpg \
   --modified-bases 5mC 5hmC \
-  --filter-threashold 0.85
+  --filter-threshold 0.85
 
 
 conda deactivate
