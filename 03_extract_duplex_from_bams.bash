@@ -14,7 +14,8 @@
 
 
 # create list of files to loop over
-bams=( /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex.bam /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex2.bam )
+#bams=( /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex.bam /gpfs01/home/mbzlld/data/danionella/basecalls/duplex_SUP_calls_duplex2.bam )
+bams=( /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/duplex_SUP_calls_duplex.bam /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/duplex_SUP_calls_duplex2.bam )
 
 
 
@@ -32,17 +33,17 @@ samtools view \
 --threads 48 \
 -O bam \
 --write-index \
---output ${bam%.*}_duplex.bam \
+--output /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_} \
 $bam
 
-# extract simplex reads from bam files
-samtools view \
---tag dx:0 \
---threads 48 \
--O bam \
---write-index \
---output ${bam%.*}_simplex.bam \
-$bam
+##  # extract simplex reads from bam files
+##  samtools view \
+##  --tag dx:0 \
+##  --threads 48 \
+##  -O bam \
+##  --write-index \
+##  --output ${bam%.*}_simplex.bam \
+##  $bam
 
 
 #--tag dx:-1 \
