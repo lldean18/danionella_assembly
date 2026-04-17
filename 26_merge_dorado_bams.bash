@@ -29,18 +29,24 @@ cd /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG
 ##  samtools index --threads 16 fish_A/fish_A_simplex_SUP.bam
 
 
-# merge dorado bams for fish B simplex
+##  # merge dorado bams for fish B simplex
+##  samtools merge \
+##    --threads 16 \
+##    --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
+##    -c -p -u - \
+##    simplex_SUP_calls_ic_207.bam simplex_SUP_calls_ic_208.bam |
+##  samtools sort --threads 16 -o fish_B/fish_B_SUP.bam -
+##  samtools index --threads 16 fish_B/fish_B_SUP.bam
+
+
+# merge dorado duplex read bams for fish A
 samtools merge \
   --threads 16 \
   --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
   -c -p -u - \
-  simplex_SUP_calls_ic_207.bam simplex_SUP_calls_ic_208.bam |
-samtools sort --threads 16 -o fish_B/fish_B_SUP.bam -
-samtools index --threads 16 fish_B/fish_B_SUP.bam
-
-
-
-
+  extracted_dx1_duplex.bam extracted_dx1_duplex2.bam |
+samtools sort --threads 16 -o fish_A/fish_A_dup_dx1_SUP.bam -
+samtools index --threads 16 fish_A/fish_A_dup_dx1_SUP.bam
 
 
 
