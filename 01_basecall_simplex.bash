@@ -37,8 +37,8 @@ config=/gpfs01/home/mbzlld/code_and_scripts/config_files/danionella_simplex_base
 
 
 # then make a directory for the basecalled files (only if it does not already exist)
-mkdir -p $wkdir/basecalls_methylation
-cd $wkdir/basecalls_methylation
+mkdir -p $wkdir/basecalls_methylation_CpG
+cd $wkdir/basecalls_methylation_CpG
 
 
 
@@ -54,13 +54,13 @@ module load cuda-12.2.2
 # basecall the simplex reads
 dorado basecaller \
 	sup@latest \
-        --modified-bases 5mC_5hmC 6mA \
+        --modified-bases 5mCG_5hmCG \
 	--recursive \
 	--models-directory /gpfs01/home/mbzlld/data/dorado_models/dorado_models \
 	--reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
        	$pod5_dir > simplex_SUP_calls_$run.bam
 
-
+#        --modified-bases 5mC_5hmC 6mA \
 #	/gpfs01/home/mbzlld/data/dorado_models/dna_r10.4.1_e8.2_400bps_sup@v5.2.0 \
 
 # unload module
