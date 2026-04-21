@@ -19,10 +19,10 @@ source $HOME/.bash_profile
 #conda create --name tidk -c bioconda tidk
 conda activate tidk
 
-cd /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1
-genome=ONTasm.bp.p_ctg_100kb.fasta
+cd /share/deepseq/shenson/ds1664_Wilkinson/03_medaka
+genome=consensus.fasta
 
-mkdir -p tidk
+mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk
 
 ###  # run the telomere explorer
 ###  tidk explore \
@@ -40,16 +40,19 @@ mkdir -p tidk
 ###  --dir tidk \
 ###  $genome
 
+# first run searched for AACCCT
+
+# running again for AAAAGAACT
 tidk search \
---string AACCCT \
---output ${genome%.*}_tidk_search \
---dir tidk \
+--string AAAAGAACT \
+--output ${genome%.*}_tidk_search_AAAAGAACT \
+--dir /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk \
 $genome
 
-cd tidk
+cd /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk
 
 tidk plot \
---tsv ${genome%.*}_tidk_search_telomeric_repeat_windows.tsv
+--tsv ${genome%.*}_tidk_search_AAAAGAACT_telomeric_repeat_windows.tsv
 
 conda deactivate
 
