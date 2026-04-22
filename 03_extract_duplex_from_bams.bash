@@ -34,7 +34,7 @@ samtools view \
 -O bam $bam |
 samtools sort \
 --threads 48 \
---output /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_}
+-o /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_}
 samtools index /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/extracted_dx1_${bam##*_}
 
 
