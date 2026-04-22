@@ -24,12 +24,9 @@ genome=consensus.fasta
 
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk
 
-###  # run the telomere explorer
-###  tidk explore \
-###  --distance 0.5 \
-###  --minimum 4 \
-###  --maximum 12 \
-###  $genome > tidk/${genome%.*}_tidk.tsv
+# run the telomere explorer
+tidk explore \
+$genome > tidk/${genome%.*}_tidk.tsv
 
 ###  ## build the database of telomeric sequences
 ###  tidk build
@@ -43,16 +40,17 @@ mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk
 # first run searched for AACCCT
 
 # running again for AAAAGAACT
+# and repeating again for Sonals asm with the AACCCT repeat
 tidk search \
---string AAAAGAACT \
---output ${genome%.*}_tidk_search_AAAAGAACT \
+--string AACCCT \
+--output ${genome%.*}_tidk_search_AACCCT \
 --dir /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk \
 $genome
 
 cd /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/tidk
 
 tidk plot \
---tsv ${genome%.*}_tidk_search_AAAAGAACT_telomeric_repeat_windows.tsv
+--tsv ${genome%.*}_tidk_search_AACCCT_telomeric_repeat_windows.tsv
 
 conda deactivate
 
