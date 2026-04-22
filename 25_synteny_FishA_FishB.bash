@@ -33,10 +33,12 @@ ntsynt_viz.py \
 --normalize \
 --blocks ntSynt.k24.w1000.synteny_blocks.tsv \
 --fais consensus.fasta.fai ONTasm.bp.p_ctg.fasta.fai \
---prefix ribbon_plot \
+--prefix ribbon_plot2 \
 --target-genome consensus.fasta \
 --no-arrow \
---ribbon_adjust 0.15
+--ribbon_adjust 0.15 \
+--length 1000 \
+--seq_length 1000
 
 
 #--name_conversion name_conversion.tsv \
