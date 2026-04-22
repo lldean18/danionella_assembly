@@ -19,34 +19,34 @@ conda activate samtools1.22
 cd /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG
 
 
-##  # merge dorado bams for fish A simplex
-##  samtools merge \
-##    --threads 16 \
-##    --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
-##    -c -p -u - \
-##    simplex_SUP_calls_ic_206.bam duplex_as_simplex_SUP_calls_duplex.bam duplex_as_simplex_SUP_calls_duplex2.bam |
-##  samtools sort --threads 16 -o fish_A/fish_A_simplex_SUP.bam -
-##  samtools index --threads 16 fish_A/fish_A_simplex_SUP.bam
-
-
 ##  # merge dorado bams for fish B simplex
 ##  samtools merge \
 ##    --threads 16 \
 ##    --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
 ##    -c -p -u - \
+##    simplex_SUP_calls_ic_206.bam duplex_as_simplex_SUP_calls_duplex.bam duplex_as_simplex_SUP_calls_duplex2.bam |
+##  samtools sort --threads 16 -o fish_B/fish_B_simplex_SUP.bam -
+##  samtools index --threads 16 fish_B/fish_B_simplex_SUP.bam
+
+
+##  # merge dorado bams for fish A simplex
+##  samtools merge \
+##    --threads 16 \
+##    --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
+##    -c -p -u - \
 ##    simplex_SUP_calls_ic_207.bam simplex_SUP_calls_ic_208.bam |
-##  samtools sort --threads 16 -o fish_B/fish_B_SUP.bam -
-##  samtools index --threads 16 fish_B/fish_B_SUP.bam
+##  samtools sort --threads 16 -o fish_A/fish_A_SUP.bam -
+##  samtools index --threads 16 fish_A/fish_A_SUP.bam
 
 
-# merge dorado duplex read bams for fish A
+# merge dorado duplex read bams for fish B
 samtools merge \
   --threads 16 \
   --reference /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
   -c -p -u - \
   extracted_dx1_duplex.bam extracted_dx1_duplex2.bam |
-samtools sort --threads 16 -o fish_A/fish_A_dup_dx1_SUP.bam -
-samtools index --threads 16 fish_A/fish_A_dup_dx1_SUP.bam
+samtools sort --threads 16 -o fish_B/fish_B_dup_dx1_SUP.bam -
+samtools index --threads 16 fish_B/fish_B_dup_dx1_SUP.bam
 
 
 
