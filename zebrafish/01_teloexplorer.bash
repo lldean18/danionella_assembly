@@ -53,7 +53,7 @@ fi
 python ~/software_bin/quarTeT/quartet.py TeloExplorer \
 	-i $genome \
 	-c animal \
-	-p teloexplorer/${genome%.*}_teloexplorer
+	-p ${genome%.*}_teloexplorer
 
 conda deactivate
 
