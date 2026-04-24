@@ -23,7 +23,7 @@ cd /gpfs01/home/mbzlld/data/danionella/fish_B/methylation/methylartist
 methylartist locus \
 --bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
 --interval ptg000006l:4690000-4830000 \
---gtf /gpfs01/home/mbzlld/data/danionella/braker.gtf \
+--gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted.gtf.gz \
 --ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
 --motif CG \
 --outfile danionella_hox_region
