@@ -23,10 +23,21 @@ cd /gpfs01/home/mbzlld/data/danionella/fish_B/methylation/methylartist
 methylartist locus \
 --bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
 --interval ptg000006l:4690000-4830000 \
---gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted.gtf.gz \
+--gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted_fix.gtf.gz \
 --ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
 --motif CG \
---outfile danionella_hox_region
+--labelgenes \
+--outfile danionella_hox_region3
+
+# try with region instead
+methylartist region \
+--bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
+--interval ptg000006l:4690000-4830000 \
+--gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted_fix.gtf.gz \
+--ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
+--motif CG \
+--labelgenes \
+--outfile danionella_hox_region4
 
 conda deactivate
 
