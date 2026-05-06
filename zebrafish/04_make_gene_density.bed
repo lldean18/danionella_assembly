@@ -1,0 +1,26 @@
+#!/bin/bash
+# 22/4/26
+
+# script to make gene density bed file
+
+cd /gpfs01/home/mbzlld/data/danionella/zebrafish
+
+# replace the chr names in the annotation
+awk 'BEGIN{FS=OFS="\t"}
+NR==FNR {map[$1]=$2; next}
+$1 in map {$1=map[$1]}
+{print}' chr_name_lookup.tsv GCF_049306965.1_GRCz12tu_genomic.gtf > GCF_049306965.1_GRCz12tu_genomic_chrs.gtf
+
+# extract only the rows containing gene coordinates
+awk '$3=="gene"' GCF_049306965.1_GRCz12tu_genomic_chrs.gtf > genes.gtf
+
+# turn gene coords into a bed file
+awk 'BEGIN{OFS="\t"} {print $1,$4-1,$5}' genes.gtf > genes.bed
+
+# make windows
+bedtools makewindows -g GCF_049306965.1_GRCz12tu_genomic.fna.fai -w 100000 > 100kb.windows.bed
+
+# count genes per 100kb window
+bedtools intersect -a 100kb.windows.bed -b genes.bed -c > genes_density.bed
+
+
