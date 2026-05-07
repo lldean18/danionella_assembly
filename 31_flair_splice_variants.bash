@@ -62,7 +62,42 @@ flair quantify \
 	--reads_manifest $manifest \
 	--threads 40
 
-
+### # This didnt really work because it turned all the 0 read counts into 1s so not using it
+### # normalise the counts to be per million reads
+### normalize_counts_matrix \
+### 	flair.quantify.counts.tsv \
+### 	flair.quantify.counts.cpm.tsv \
+### 	cpm
 
 # deactivate software
 conda deactivate
+
+################################################################
+# processing the output (ran this manually in terminal window) #
+################################################################
+
+# sum across replicates of the same sample (which in this case is all of them)
+awk '{for(i=2;i<=NF;i++) a[$1]+=$i} END{for(k in a) print k,a[k]}' flair.quantify.counts.tsv > flair.quantify.counts.summed.tsv
+
+# extract only the splice variants for the genes of interest
+# these are the hox genes
+declare -a arr=("g16391" "g16392" "g16393" "g16394" "g16395" "g16396" "g16397" "g16398" "g16399" "g16400" "g16401" "g16402" "g16403")
+for gene_of_interest in "${arr[@]}"
+do
+grep -i $gene_of_interest flair.quantify.counts.summed.tsv > ${gene_of_interest}.flair.quantify.counts.summed.tsv
+
+# remove the transcript info we're not interested in here
+sed -i 's/^.*_//' ${gene_of_interest}.flair.quantify.counts.summed.tsv
+
+# merge the counts for each gene
+awk 'BEGIN{OFS="\t"}
+ {sum[$1] += $2} END {for(gene in sum) print gene, sum[gene]}' ${gene_of_interest}.flair.quantify.counts.summed.tsv > tmp
+mv tmp ${gene_of_interest}.flair.quantify.counts.summed.tsv
+done
+
+# concatenate the gene counts
+cat *.flair.quantify.counts.summed.tsv > hox.gene.flair.counts.tsv
+
+
+
+
