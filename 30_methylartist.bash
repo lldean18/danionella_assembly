@@ -34,7 +34,7 @@ for region in "${array[@]}"; do
     new_array+=("${contig}:${new_start}-${new_end}")
 done
 
-for location in ${array[@]}
+for location in ${new_array[@]}
 do
 # make a plot of the hox genes
 methylartist locus \
