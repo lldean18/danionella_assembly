@@ -29,8 +29,8 @@ for region in "${array[@]}"; do
     coords=${region#*:}
     start=${coords%-*}
     end=${coords#*-}
-    new_start=$((start - 10000))
-    new_end=$((end + 10000))
+    new_start=$((start - 1000))
+    new_end=$((end + 1000))
     new_array+=("${contig}:${new_start}-${new_end}")
 done
 
