@@ -19,26 +19,27 @@ conda activate methylartist
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_B/methylation/methylartist
 cd /gpfs01/home/mbzlld/data/danionella/fish_B/methylation/methylartist
 
-# # make a plot of the hox genes
-# methylartist locus \
+# make a plot of the hox genes
+methylartist locus \
+--bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
+--interval ptg000006l:4705906-4718000 \
+--gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted_fix.gtf.gz \
+--ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
+--motif CG \
+--labelgenes \
+--highlight_alpha 0.75 \
+--highlight 4707900-4710104,4711028-4713088,4714103-4715654,4732395-4734240,4737914-4739791,4759332-4760837,4771319-4772536,4774530-4775936,4782447-4789604,4795517-4798605,4804187-4806854,4820982-4822198,4829332-4830950 \
+--outfile danionella_hox_region_highlight5
+
+# # try with region instead
+# methylartist region \
 # --bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
 # --interval ptg000006l:4690000-4830000 \
 # --gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted_fix.gtf.gz \
 # --ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
 # --motif CG \
 # --labelgenes \
-# --highlight 4707900-4710104,4711028-4713088,4714103-4715654,4732395-4734240,4737914-4739791,4759332-4760837,4771319-4772536,4774530-4775936,4782447-4789604,4795517-4798605,4804187-4806854,4820982-4822198,4829332-4830950 \
-# --outfile danionella_hox_region_highlight
-
-# try with region instead
-methylartist region \
---bams /gpfs01/home/mbzlld/data/danionella/basecalls_methylation_CpG/fish_B/fish_B_simplex_SUP.bam \
---interval ptg000006l:4690000-4830000 \
---gtf /gpfs01/home/mbzlld/data/danionella/braker_sorted_fix.gtf.gz \
---ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
---motif CG \
---labelgenes \
---outfile danionella_hox_region4
+# --outfile danionella_hox_region4
 
 conda deactivate
 
