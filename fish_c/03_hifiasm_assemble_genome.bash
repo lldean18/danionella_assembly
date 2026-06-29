@@ -30,7 +30,7 @@ echo "This is hifiasm version 0.25.0 running on the file $reads and saving the o
 hifiasm \
 -t 96 \
 --ont \
--o ONTasm \
+-o fish_c \
 $reads
 
 # convert the final assembly to fasta format
