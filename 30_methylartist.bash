@@ -29,8 +29,8 @@ for region in "${array[@]}"; do
     coords=${region#*:}
     start=${coords%-*}
     end=${coords#*-}
-    new_start=$((start - 1000))
-    new_end=$((end + 1000))
+    new_start=$((start - 500))
+    new_end=$((end + 500))
     new_array+=("${contig}:${new_start}-${new_end}")
 done
 
@@ -46,7 +46,8 @@ methylartist locus \
 --ref /share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta \
 --motif CG \
 --labelgenes \
---highlight_alpha 1 \
+--highlightpalette viridis \
+--highlight_alpha 0.5 \
 --highlight 4707900-4710104,4711028-4713088,4714103-4715654,4732395-4734240,4737914-4739791,4759332-4760837,4771319-4772536,4774530-4775936,4782447-4789604,4795517-4798605,4804187-4806854,4820982-4822198,4829332-4830950 \
 --outfile danionella_hox_region_$location
 done
