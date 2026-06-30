@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=96
-#SBATCH --mem=1495g
+#SBATCH --mem=1000g
 #SBATCH --time=140:00:00
 #SBATCH --job-name=bc_danionella_assembly
 #SBATCH --output=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/slurm-%x-%j.out
