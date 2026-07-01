@@ -19,6 +19,7 @@ source $HOME/.bash_profile
 conda activate hifiasm_0.25.0
 attempt=1
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_b_and_c/hifiasm_$attempt
+cd /gpfs01/home/mbzlld/data/danionella/fish_b_and_c/hifiasm_$attempt
 reads=/gpfs01/home/mbzlld/data/danionella/fish_b_and_c/SUP_fish_b_and_c.fastq.gz
 
 
@@ -34,7 +35,9 @@ hifiasm \
 $reads
 
 # convert the final assembly to fasta format
-awk '/^S/{print ">"$2;print $3}' ONTasm.bp.p_ctg.gfa > ONTasm.bp.p_ctg.fasta
+awk '/^S/{print ">"$2;print $3}' fish_b_and_c.bp.p_ctg.gfa > fish_b_and_c.bp.p_ctg.fasta
+awk '/^S/{print ">"$2;print $3}' fish_b_and_c.bp.hap1.p_ctg.gfa > fish_b_and_c.bp.hap1.p_ctg.fasta
+awk '/^S/{print ">"$2;print $3}' fish_b_and_c.bp.hap2.p_ctg.gfa > fish_b_and_c.bp.hap2.p_ctg.fasta
 
 
 # cleanup env
