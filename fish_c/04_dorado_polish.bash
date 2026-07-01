@@ -10,7 +10,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=50
 #SBATCH --mem=256g
-#SBATCH --time=130:00:00
+#SBATCH --time=100:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
 
@@ -20,7 +20,8 @@ module load cuda-12.2.2
 conda activate samtools1.22
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_c/dorado_polish
 cd /gpfs01/home/mbzlld/data/danionella/fish_c/dorado_polish
-assembly=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg.fasta
+#assembly=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg.fasta
+assembly=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap2.p_ctg.fasta
 reads=/gpfs01/home/mbzlld/data/danionella/fish_c/basecalls/SUP_fish_c.bam
 
 # Align reads to a reference using dorado aligner, sort and index
