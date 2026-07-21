@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=96
 #SBATCH --mem=1000g
 #SBATCH --time=140:00:00
-#SBATCH --job-name=bc_danionella_assembly
+#SBATCH --job-name=fish_c_danionella_assembly
 #SBATCH --output=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/slurm-%x-%j.out
 
 
@@ -17,7 +17,7 @@
 source $HOME/.bash_profile
 #conda create --name hifiasm_0.25.0 hifiasm -y
 conda activate hifiasm_0.25.0
-attempt=1
+attempt=2
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_$attempt
 cd /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_$attempt
 reads=/gpfs01/home/mbzlld/data/danionella/fish_c/SUP_fish_c.fastq.gz
@@ -31,6 +31,8 @@ echo "This is hifiasm version 0.25.0 running on the file $reads and saving the o
 hifiasm \
 -t 96 \
 --ont \
+--dual-scaf \
+--telo-m AACCCT \
 -o fish_c \
 $reads
 
