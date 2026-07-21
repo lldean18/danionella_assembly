@@ -10,7 +10,7 @@
 #SBATCH --mem=1000g
 #SBATCH --time=140:00:00
 #SBATCH --job-name=fish_c_danionella_assembly
-#SBATCH --output=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/slurm-%x-%j.out
+#SBATCH --output=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/slurm-%x-%j.out
 
 
 # setup env
@@ -20,7 +20,7 @@ conda activate hifiasm_0.25.0
 attempt=2
 mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_$attempt
 cd /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_$attempt
-reads=/gpfs01/home/mbzlld/data/danionella/fish_c/SUP_fish_c.fastq.gz
+reads=/gpfs01/home/mbzlld/data/danionella/fish_c/basecalls/SUP_fish_c.fastq.gz
 
 
 # print a line to the slurm output that says exactly what was done on this run
