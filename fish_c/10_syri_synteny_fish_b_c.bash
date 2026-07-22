@@ -25,51 +25,52 @@ reference=/gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_3/fish_b.bp.p_ctg_1
 assembly=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg_100kb.fasta
 
 
-# align our assembly to the reference
-#asm=asm5 # 0.1% sequence divergence
-#asm=asm10 # 1% sequence divergence
-#asm=asm20 # 5% sequence divergence
-echo "aligning our assembly to the reference for naming our chrs the same as theirs..."
-conda activate minimap2
-minimap2 -x asm5 -t 16 $reference $assembly > asm_to_ref_alignment.paf
-conda deactivate
-echo -e "Done\n\n"
-
-# identify the best matching chromosomes for each of our fragments
-echo "identifying the best matching chromosomes for each of our fragments..."
-awk '{print $1, $6, $8-$7}' asm_to_ref_alignment.paf | sort -k1,1 -k3nr | awk '!seen[$1]++' > contig_assignments.txt
-sed -i -r 's/[^ ]*$//' contig_assignments.txt # get rid of the contig lengths at the ends of the lines
-sed -i -r 's/ /\t/' contig_assignments.txt # replace spaces with tabs
-echo -e "Done\n\n"
-
-# rename contigs in our assembly based on their assignments
-echo "renaming contigs in our assembly based on their assignments relative to the reference..."
-conda activate seqkit
-seqkit replace -p "^(.*)" -r "{kv}" --kv-file contig_assignments.txt $assembly > assembly_ref_named_contigs.fasta
-echo -e "Done\n\n"
-
-
-# filter so that only the longest contig for each match to the reference is retained
-echo "retaining only the longest contig for each match to the reference..."
-seqkit seq -j 4 -w 0 assembly_ref_named_contigs.fasta | seqkit rename | seqkit sort -l -r | sed 's/_[0-9][0-9]*//' | seqkit rmdup > assembly_ref_named_contigs_longest.fasta
-conda deactivate
-echo -e "Done\n\n"
-
-# Filter so that only contigs that are in our assembly are in a new version of the reference
-# because syri won't work with differing numbers of chromosomes in the same assembly
-echo "making a list of the fasta headers to filter with..."
-# make a text file of the headers to search for
-grep ">" assembly_ref_named_contigs_longest.fasta > asm_contig_names.txt
-sed -i 's/>//' asm_contig_names.txt
-sed -i 's/[[:space:]]*$//' asm_contig_names.txt
-echo -e "Done\n\n"
-
-# filter the reference with this file
-echo "filtering the reference so that it only contains sequences that are in our assembly..."
-conda activate seqkit
-seqkit grep -f asm_contig_names.txt $reference > filtered_reference.fasta
-conda deactivate
-echo -e "Done\n\n"
+# hashing bc it ran already
+###  # align our assembly to the reference
+###  #asm=asm5 # 0.1% sequence divergence
+###  #asm=asm10 # 1% sequence divergence
+###  #asm=asm20 # 5% sequence divergence
+###  echo "aligning our assembly to the reference for naming our chrs the same as theirs..."
+###  conda activate minimap2
+###  minimap2 -x asm5 -t 16 $reference $assembly > asm_to_ref_alignment.paf
+###  conda deactivate
+###  echo -e "Done\n\n"
+###  
+###  # identify the best matching chromosomes for each of our fragments
+###  echo "identifying the best matching chromosomes for each of our fragments..."
+###  awk '{print $1, $6, $8-$7}' asm_to_ref_alignment.paf | sort -k1,1 -k3nr | awk '!seen[$1]++' > contig_assignments.txt
+###  sed -i -r 's/[^ ]*$//' contig_assignments.txt # get rid of the contig lengths at the ends of the lines
+###  sed -i -r 's/ /\t/' contig_assignments.txt # replace spaces with tabs
+###  echo -e "Done\n\n"
+###  
+###  # rename contigs in our assembly based on their assignments
+###  echo "renaming contigs in our assembly based on their assignments relative to the reference..."
+###  conda activate seqkit
+###  seqkit replace -p "^(.*)" -r "{kv}" --kv-file contig_assignments.txt $assembly > assembly_ref_named_contigs.fasta
+###  echo -e "Done\n\n"
+###  
+###  
+###  # filter so that only the longest contig for each match to the reference is retained
+###  echo "retaining only the longest contig for each match to the reference..."
+###  seqkit seq -j 4 -w 0 assembly_ref_named_contigs.fasta | seqkit rename | seqkit sort -l -r | sed 's/_[0-9][0-9]*//' | seqkit rmdup > assembly_ref_named_contigs_longest.fasta
+###  conda deactivate
+###  echo -e "Done\n\n"
+###  
+###  # Filter so that only contigs that are in our assembly are in a new version of the reference
+###  # because syri won't work with differing numbers of chromosomes in the same assembly
+###  echo "making a list of the fasta headers to filter with..."
+###  # make a text file of the headers to search for
+###  grep ">" assembly_ref_named_contigs_longest.fasta > asm_contig_names.txt
+###  sed -i 's/>//' asm_contig_names.txt
+###  sed -i 's/[[:space:]]*$//' asm_contig_names.txt
+###  echo -e "Done\n\n"
+###  
+###  # filter the reference with this file
+###  echo "filtering the reference so that it only contains sequences that are in our assembly..."
+###  conda activate seqkit
+###  seqkit grep -f asm_contig_names.txt $reference > filtered_reference.fasta
+###  conda deactivate
+###  echo -e "Done\n\n"
 
 ################################################################################################
 #### Flip the orientation of our sequences that are on the opposite strand to the reference ####
@@ -93,12 +94,36 @@ seqkit seq --seq-type dna -n assembly_ref_named_contigs_longest.fasta | while re
     echo -e ">$name\n$(seqkit seq --seq-type dna --reverse --complement ~/seq2.fasta | seqkit seq --seq)" > ~/seq2_rc.fasta
 
     # Align both orientations with MAFFT
-    mafft --quiet ~/seq1.fasta ~/seq2.fasta > ~/aligned1.fasta
-    mafft --quiet ~/seq1.fasta ~/seq2_rc.fasta > ~/aligned2.fasta
+    cat ~/seq1.fasta ~/seq2.fasta | mafft --quiet - > ~/aligned1.fasta
+    cat ~/seq1.fasta ~/seq2_rc.fasta | mafft --quiet - > ~/aligned2.fasta
 
     # Calculate alignment scores
-    score1=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned1.fasta | seqkit stats))
-    score2=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned2.fasta | seqkit stats))
+    score1=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
+        score=0
+        for(i=1;i<=length(seq[1]);i++){
+            a=substr(seq[1],i,1)
+            b=substr(seq[2],i,1)
+            if(a=="-" || b=="-")
+                score-=2
+            else if(a==b)
+                score++
+            else
+                score-- } print score }' aligned1.fasta)
+
+    score2=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
+        score=0
+        for(i=1;i<=length(seq[1]);i++){
+            a=substr(seq[1],i,1)
+            b=substr(seq[2],i,1)
+            if(a=="-" || b=="-")
+                score-=2
+            else if(a==b)
+                score++
+            else
+                score-- }  print score }' aligned2.fasta)
+
+#    score1=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned1.fasta | seqkit stats))
+#    score2=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned2.fasta | seqkit stats))
 
     # Choose best orientation
     if (( $(echo "$score1 >= $score2" | bc -l) )); then
