@@ -20,8 +20,9 @@ conda activate seqkit
 #cd /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1
 cd /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2
 
-asm=fish_c.bp.p_ctg.fasta
+#asm=fish_c.bp.p_ctg.fasta
 #asm=fish_c.bp.hap2.p_ctg.fasta
+asm=fish_c.bp.hap1.p_ctg.fasta
 
 
 ############ FILTER CONTIG LENGTH
