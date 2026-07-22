@@ -18,9 +18,12 @@ source $HOME/.bash_profile
 conda activate quartet
 mkdir /gpfs01/home/mbzlld/data/danionella/fish_c/teloexplorer
 cd /gpfs01/home/mbzlld/data/danionella/fish_c/teloexplorer
+
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg.fasta
+#genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap1.p_ctg.fasta
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap2.p_ctg.fasta
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg_100kb.fasta
+genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap1.p_ctg_100kb.fasta
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap2.p_ctg_100kb.fasta
 
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg.fasta
@@ -28,7 +31,8 @@ cd /gpfs01/home/mbzlld/data/danionella/fish_c/teloexplorer
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap2.p_ctg.fasta
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg_100kb.fasta
 #genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap1.p_ctg_100kb.fasta
-genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap2.p_ctg_100kb.fasta
+#genome=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap2.p_ctg_100kb.fasta
+
 
 # unzip the input fasta file if it is gzipped and reassign its name
 if [[ "$genome" == *.gz ]]; then
@@ -54,7 +58,7 @@ fi
 python ~/software_bin/quarTeT/quartet.py TeloExplorer \
 	-i $genome \
 	-c animal \
-	-p $(basename ${genome%.*})_new_quartet
+	-p $(basename ${genome%.*})_quartet
 
 conda deactivate
 
