@@ -16,16 +16,16 @@
 source $HOME/.bash_profile
 #conda create --name ntsynt -c bioconda -c conda-forge ntsynt
 conda activate ntsynt
-mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_c/ntsynt/fish_c
-cd /gpfs01/home/mbzlld/data/danionella/fish_c/ntsynt/fish_c
+mkdir -p /gpfs01/home/mbzlld/data/danionella/fish_c/ntsynt/fish_c_dualscaff
+cd /gpfs01/home/mbzlld/data/danionella/fish_c/ntsynt/fish_c_dualscaff
 
 
 # calculate synteny between assemblies
 ntSynt \
   --divergence 0.5 \
-  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg.fasta \
-  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap1.p_ctg.fasta \
-  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.hap2.p_ctg.fasta \
+  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg.fasta \
+  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap1.p_ctg.fasta \
+  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap2.p_ctg.fasta \
 
 # plot synteny between assemblies
 ntsynt_viz.py \
