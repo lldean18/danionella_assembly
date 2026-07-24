@@ -79,13 +79,13 @@ against the reference $reference
 rasusa aln \
 --coverage 15 \
 $(basename ${fastq%.*.*})_TO_$(basename ${reference%.*})_flt.bam |
-samtools sort --threads 16 -o $(basename ${fastq%.*.*})_downsampled.bam
-samtools index --threads 16 $(basename ${fastq%.*.*})_downsampled.bam
+samtools sort --threads 16 -o $(basename ${fastq%.*.*})_TO_$(basename ${reference%.*})_flt_downsampled.bam
+samtools index --threads 16 $(basename ${fastq%.*.*})_TO_$(basename ${reference%.*})_flt_downsampled.bam
 
 # check final depth
 echo "the final depth of the downsampled bam file is:"
 samtools depth \
-$(basename ${fastq%.*.*})_downsampled.bam \
+$(basename ${fastq%.*.*})_TO_$(basename ${reference%.*})_flt_downsampled.bam \
 | awk '{sum+=$3} END {print sum/NR}'
 
 done
