@@ -72,66 +72,70 @@ assembly=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg_10
 ###  conda deactivate
 ###  echo -e "Done\n\n"
 
-################################################################################################
-#### Flip the orientation of our sequences that are on the opposite strand to the reference ####
-################################################################################################
 
-# flip the orientation of our sequences that are on the wrong strand
-echo "flipping the orientation of our sequences so that they match the reference..."
-conda activate seqkit
-# define output
-touch assembly_ref_named_contigs_longest_orient.fasta
+# hashing tis flipping bit out bc it doesnt work, it hangs in the loop forever
+######      ################################################################################################
+######      #### Flip the orientation of our sequences that are on the opposite strand to the reference ####
+######      ################################################################################################
+######      
+######      # flip the orientation of our sequences that are on the wrong strand
+######      echo "flipping the orientation of our sequences so that they match the reference..."
+######      conda activate seqkit
+######      # define output
+######      touch assembly_ref_named_contigs_longest_orient.fasta
+######      
+######      # Loop through sequences in our assembly fasta file
+######      seqkit seq --seq-type dna -n assembly_ref_named_contigs_longest.fasta | while read name; do
+######          # Extract sequences
+######          seq1=$(seqkit grep -p "$name" assembly_ref_named_contigs_longest.fasta | seqkit seq --seq)
+######          seq2=$(seqkit grep -p "$name" filtered_reference.fasta | seqkit seq --seq)
+######      
+######          # Save sequences to temporary files
+######          echo -e ">$name\n$seq1" > ~/seq1.fasta
+######          echo -e ">$name\n$seq2" > ~/seq2.fasta
+######          echo -e ">$name\n$(seqkit seq --seq-type dna --reverse --complement ~/seq2.fasta | seqkit seq --seq)" > ~/seq2_rc.fasta
+######      
+######          # Align both orientations with MAFFT
+######          cat ~/seq1.fasta ~/seq2.fasta | mafft --quiet - > ~/aligned1.fasta
+######          cat ~/seq1.fasta ~/seq2_rc.fasta | mafft --quiet - > ~/aligned2.fasta
+######      
+######          # Calculate alignment scores
+######          score1=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
+######              score=0
+######              for(i=1;i<=length(seq[1]);i++){
+######                  a=substr(seq[1],i,1)
+######                  b=substr(seq[2],i,1)
+######                  if(a=="-" || b=="-")
+######                      score-=2
+######                  else if(a==b)
+######                      score++
+######                  else
+######                      score-- } print score }' aligned1.fasta)
+######      
+######          score2=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
+######              score=0
+######              for(i=1;i<=length(seq[1]);i++){
+######                  a=substr(seq[1],i,1)
+######                  b=substr(seq[2],i,1)
+######                  if(a=="-" || b=="-")
+######                      score-=2
+######                  else if(a==b)
+######                      score++
+######                  else
+######                      score-- }  print score }' aligned2.fasta)
+######      
+######      #    score1=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned1.fasta | seqkit stats))
+######      #    score2=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned2.fasta | seqkit stats))
+######      
+######          # Choose best orientation
+######          if (( $(echo "$score1 >= $score2" | bc -l) )); then
+######              cat seq2.fasta >> assembly_ref_named_contigs_longest_orient.fasta
+######          else
+######              seqkit seq --reverse --complement seq2.fasta >> assembly_ref_named_contigs_longest_orient.fasta
+######          fi
+######      done
 
-# Loop through sequences in our assembly fasta file
-seqkit seq --seq-type dna -n assembly_ref_named_contigs_longest.fasta | while read name; do
-    # Extract sequences
-    seq1=$(seqkit grep -p "$name" assembly_ref_named_contigs_longest.fasta | seqkit seq --seq)
-    seq2=$(seqkit grep -p "$name" filtered_reference.fasta | seqkit seq --seq)
-
-    # Save sequences to temporary files
-    echo -e ">$name\n$seq1" > ~/seq1.fasta
-    echo -e ">$name\n$seq2" > ~/seq2.fasta
-    echo -e ">$name\n$(seqkit seq --seq-type dna --reverse --complement ~/seq2.fasta | seqkit seq --seq)" > ~/seq2_rc.fasta
-
-    # Align both orientations with MAFFT
-    cat ~/seq1.fasta ~/seq2.fasta | mafft --quiet - > ~/aligned1.fasta
-    cat ~/seq1.fasta ~/seq2_rc.fasta | mafft --quiet - > ~/aligned2.fasta
-
-    # Calculate alignment scores
-    score1=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
-        score=0
-        for(i=1;i<=length(seq[1]);i++){
-            a=substr(seq[1],i,1)
-            b=substr(seq[2],i,1)
-            if(a=="-" || b=="-")
-                score-=2
-            else if(a==b)
-                score++
-            else
-                score-- } print score }' aligned1.fasta)
-
-    score2=$(awk ' /^>/ {n++; next} {seq[n]=seq[n]$0} END{
-        score=0
-        for(i=1;i<=length(seq[1]);i++){
-            a=substr(seq[1],i,1)
-            b=substr(seq[2],i,1)
-            if(a=="-" || b=="-")
-                score-=2
-            else if(a==b)
-                score++
-            else
-                score-- }  print score }' aligned2.fasta)
-
-#    score1=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned1.fasta | seqkit stats))
-#    score2=$(awk '/identity/ {print $3}' <(seqkit fx2tab -n -i -p ~/aligned2.fasta | seqkit stats))
-
-    # Choose best orientation
-    if (( $(echo "$score1 >= $score2" | bc -l) )); then
-        cat seq2.fasta >> assembly_ref_named_contigs_longest_orient.fasta
-    else
-        seqkit seq --reverse --complement seq2.fasta >> assembly_ref_named_contigs_longest_orient.fasta
-    fi
-done
+cp assembly_ref_named_contigs_longest.fasta assembly_ref_named_contigs_longest_orient.fasta
 
 # Cleanup
 rm seq1.fasta seq2.fasta seq2_rc.fasta aligned1.fasta aligned2.fasta
