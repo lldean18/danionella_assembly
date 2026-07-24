@@ -56,4 +56,3 @@ mv variants/${ind}/merge_output.gvcf.gz.tbi variants/${ind}/merge_output_${ind}.
 # cleanup env
 conda deactivate
 
-
