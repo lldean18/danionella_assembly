@@ -49,6 +49,7 @@ run_clair3.sh \
   --model_path="${CLAIR3_PATH}/models/${MODEL_NAME}" \
   --output=variants/${ind} \
   --include_all_ctgs \
+  --output_all_contigs_in_gvcf_header \
   --sample_name=${ind} \
   --gvcf
 
