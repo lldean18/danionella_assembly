@@ -31,30 +31,34 @@ asms=(
 )
 
 # hashing out this block bc it ran successfully
-##  for  asm in ${asms[@]}
-##  do
-##  
+for  asm in ${asms[@]}
+do
+
 ##  # Map the haplotype assemblies
 ##  minimap2 -t 16 -ax asm5 $reference $asm > $(basename ${asm%.*.*}).paf
 ##  
-##  # call SNPs and indels
-##  paftools.js call -L1000 -f $reference $(basename ${asm%.*.*}).paf > $(basename ${asm%.*.*}).vcf
-##  
-##  # compress and index
-##  bgzip $(basename ${asm%.*.*}).vcf
-##  tabix -p vcf $(basename ${asm%.*.*}).vcf.gz
-##  
-##  done 
+# call SNPs and indels
+paftools.js call -L1000 -f $reference $(basename ${asm%.*.*}).paf > $(basename ${asm%.*.*}).vcf
+
+# compress and index
+bgzip $(basename ${asm%.*.*}).vcf
+tabix -p vcf $(basename ${asm%.*.*}).vcf.gz
+
+# update the sample names
+echo "$(basename ${asm%.*.*})" > sample_name.txt
+bcftools reheader --samples sample_name.txt --threads 16 $(basename ${asm%.*.*}).vcf.gz > $(basename ${asm%.*.*}).vcf
+
+done 
 
 # merge the resulting vcfs
 bcftools merge \
     --threads 16 \
-    ONTasm.bp.hap1.vcf.gz \
-    ONTasm.bp.hap2.vcf.gz \
-    fish_b.bp.hap1.vcf.gz \
-    fish_b.bp.hap2.vcf.gz \
-    fish_c.bp.hap1.vcf.gz \
-    fish_c.bp.hap2.vcf.gz \
+    ONTasm.bp.hap1.vcf \
+    ONTasm.bp.hap2.vcf \
+    fish_b.bp.hap1.vcf \
+    fish_b.bp.hap2.vcf \
+    fish_c.bp.hap1.vcf \
+    fish_c.bp.hap2.vcf \
     -Oz \
     -o haplotypes.vcf.gz
 
