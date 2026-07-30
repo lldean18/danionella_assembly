@@ -3,7 +3,7 @@
 
 # script to map phased assemblies to the reference
 
-#SBATCH --job-name=map_pahsed
+#SBATCH --job-name=map_phased
 #SBATCH --partition=defq
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
