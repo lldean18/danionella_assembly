@@ -9,7 +9,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=50g
-#SBATCH --time=80:00:00
+#SBATCH --time=24:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
 # setup env
@@ -30,25 +30,25 @@ asms=(
 /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.hap2.p_ctg.fasta
 )
 
-
-for  asm in ${asms[@]}
-do
-
-# Map the haplotype assemblies
-minimap2 -t 16 -ax asm5 $reference $asm > $(basename ${asm%.*.*}).paf
-
-# call SNPs and indels
-paftools.js call -L1000 -f $reference $(basename ${asm%.*.*}).paf > $(basename ${asm%.*.*}).vcf
-
-# compress and index
-bgzip $(basename ${asm%.*.*}).vcf
-tabix -p vcf $(basename ${asm%.*.*}).vcf.gz
-
-done 
+# hashing out this block bc it ran successfully
+##  for  asm in ${asms[@]}
+##  do
+##  
+##  # Map the haplotype assemblies
+##  minimap2 -t 16 -ax asm5 $reference $asm > $(basename ${asm%.*.*}).paf
+##  
+##  # call SNPs and indels
+##  paftools.js call -L1000 -f $reference $(basename ${asm%.*.*}).paf > $(basename ${asm%.*.*}).vcf
+##  
+##  # compress and index
+##  bgzip $(basename ${asm%.*.*}).vcf
+##  tabix -p vcf $(basename ${asm%.*.*}).vcf.gz
+##  
+##  done 
 
 # merge the resulting vcfs
 bcftools merge \
-    -@ 16 \
+    --threads 16 \
     ONTasm.bp.hap1.vcf.gz \
     ONTasm.bp.hap2.vcf.gz \
     fish_b.bp.hap1.vcf.gz \
