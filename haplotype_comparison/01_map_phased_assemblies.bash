@@ -42,7 +42,7 @@ paftools.js call -L1000 -f $reference $(basename ${asm%.*.*}).paf > $(basename $
 
 # compress and index
 bgzip $(basename ${asm%.*.*}).vcf
-tabix -p vcf $(basename ${asm%.*.*}).vcf.gz
+tabix -f -p vcf $(basename ${asm%.*.*}).vcf.gz
 
 # update the sample names
 echo "$(basename ${asm%.*.*})" > sample_name.txt
