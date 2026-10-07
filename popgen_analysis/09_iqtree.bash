@@ -28,6 +28,7 @@ iqtree \
     -s $(basename ${vcf%.*.*}).min3.phy \
     -m MFP+ASC \
     -bb 1000 \
+    -st DNA \
     -T AUTO
 
 
