@@ -21,11 +21,11 @@ cd /gpfs01/home/mbzlld/data/danionella/popgen/iqtree
 vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/danionella_all_reads_Q30_DP10_GQ20_SNP_mis0.9.vcf.gz
 
 # convert the vcf to phylip format
-vcftools --gzvcf $vcf --out $(basename ${vcf%.*.*}) --phylip
+python /gpfs01/home/mbzlld/software_bin/vcf2phylip.py -i $vcf
 
 # generate the tree
 iqtree \
-    -s $(basename ${vcf%.*.*}).phy \
+    -s $(basename ${vcf%.*.*}).min3.phy \
     -m MFP+ASC \
     -bb 1000 \
     -T AUTO
