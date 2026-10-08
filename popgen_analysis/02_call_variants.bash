@@ -1,5 +1,7 @@
 #!/bin/bash
 # 24/7/26
+# modified 8/10/26 to call against the final curated fish C assembly
+# moved previous analysis to ~/data/danionella/popgen_old
 
 # script to call variants from ONT data
 
@@ -35,8 +37,8 @@ MODEL_NAME=r1041_e82_400bps_sup_v500
 #dna_r10.4.1_e8.2_400bps_sup@v5.2.0
 cd /gpfs01/home/mbzlld/data/danionella/popgen
 mkdir -p variants
-reference=/share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta
-
+#reference=/share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta
+reference=/gpfs01/home/mbzlld/data/danionella/fish_c/fishC_polished_nuclear_curated_no_ptg000061l.fa
 
 
 # run clair3 to call variants for each ind
