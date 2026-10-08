@@ -37,8 +37,7 @@ fastp \
 --thread 8
 
 # cleanup env
-conda deactivate
-
+module unload fastp-uoneasy/0.23.4-GCC-12.3.0
 
 
 
