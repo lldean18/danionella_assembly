@@ -33,7 +33,7 @@ rev_reads=ds1756_2_S3_L001_and_L002_R2.fastq.gz
 # standard illumina adatper
 #adapter=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
 # Nextera transposase detected by fastqc
-adapter=CTGTCTCTTATACACATCT
+adapter=CTGTCTCTTATA
 
 # trim reads
 cutadapt \
