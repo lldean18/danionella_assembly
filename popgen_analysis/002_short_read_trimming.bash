@@ -33,6 +33,7 @@ fastp \
 -I $rev_reads \
 -o trimmed_fastqs/$fwd_reads \
 -O trimmed_fastqs/$rev_reads \
+--detect_adapter_for_pe \
 --thread 8
 
 # cleanup env
