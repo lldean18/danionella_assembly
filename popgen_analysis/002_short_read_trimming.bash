@@ -33,6 +33,9 @@ fastp \
 -I $rev_reads \
 -o trimmed_fastqs/$fwd_reads \
 -O trimmed_fastqs/$rev_reads \
+--trim_front1 16 \
+--trim_poly_x \
+--poly_x_min_len 4 \
 --detect_adapter_for_pe \
 --thread 8
 
