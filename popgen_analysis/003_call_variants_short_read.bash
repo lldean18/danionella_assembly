@@ -63,13 +63,13 @@ VALIDATION_STRINGENCY=SILENT \
 MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
 INPUT=bams/${SAMPLE}_tmp.bam \
 OUTPUT=bams/${SAMPLE}.bam \
-METRICS_FILE=bam_info/${SAMPLE}.rmd.bam.metrics
+METRICS_FILE=bams/bam_info/${SAMPLE}.rmd.bam.metrics
 
 # index the final bam file
 samtools index bams/${SAMPLE}.bam
 
 # remove the temp file with duplicates not removed
-rm bams/${SAMPLE}_tmp.bam*
+#rm bams/${SAMPLE}_tmp.bam*
 
 
 
