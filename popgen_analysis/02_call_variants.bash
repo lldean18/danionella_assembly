@@ -44,7 +44,7 @@ reference=/gpfs01/home/mbzlld/data/danionella/fish_c/fishC_polished_nuclear_cura
 # run clair3 to call variants for each ind
 #python3 ${CLAIR3_PATH}/run_clair3.py \
 run_clair3.sh \
-  --bam_fn=downsampling/${ind}_TO_consensus_flt_downsampled.bam \
+  --bam_fn=downsampling/${ind}_downsampled_mapped_to_curated_flt_downsampled.bam \
   --ref_fn=$reference \
   --threads=48 \
   --tmpdir ~/tmp \
