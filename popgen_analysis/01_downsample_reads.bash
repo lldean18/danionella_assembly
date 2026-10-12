@@ -18,7 +18,8 @@ conda activate minimap2
 mkdir -p /gpfs01/home/mbzlld/data/danionella/popgen/downsampling
 cd /gpfs01/home/mbzlld/data/danionella/popgen/downsampling
 
-reference=/share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta
+#reference=/share/deepseq/shenson/ds1664_Wilkinson/03_medaka/consensus.fasta
+reference=/gpfs01/home/mbzlld/data/danionella/fish_c/fishC_polished_nuclear_curated_no_ptg000061l.fa
 
 fastqs=(
 /gpfs01/home/mbzlld/data/danionella/fish_c/basecalls/SUP_fish_c.fastq.gz
