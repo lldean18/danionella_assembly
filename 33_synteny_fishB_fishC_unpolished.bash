@@ -16,8 +16,8 @@
 source $HOME/.bash_profile
 #conda create --name ntsynt -c bioconda -c conda-forge ntsynt
 conda activate ntsynt
-mkdir -p /gpfs01/home/mbzlld/data/danionella/ntsynt_fishA_fishB
-cd /gpfs01/home/mbzlld/data/danionella/ntsynt_fishA_fishB
+mkdir -p /gpfs01/home/mbzlld/data/danionella/ntsynt_fishB_fishC
+cd /gpfs01/home/mbzlld/data/danionella/ntsynt_fishB_fishC
 
 # estimate divergence between sequences
 
@@ -25,8 +25,10 @@ cd /gpfs01/home/mbzlld/data/danionella/ntsynt_fishA_fishB
 # calculate synteny between assemblies
 ntSynt \
   --divergence 0.5 \
-  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg.fasta \
-  /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_3/fish_b.bp.p_ctg.fasta
+  /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_asm1/ONTasm.bp.p_ctg.fasta \
+  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_1/fish_c.bp.p_ctg.fasta
+#  /gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/fish_c.bp.p_ctg.fasta \
+#  /gpfs01/home/mbzlld/data/danionella/fish_B/hifiasm_3/fish_b.bp.p_ctg.fasta
   
 
 # plot synteny between assemblies
