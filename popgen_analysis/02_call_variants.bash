@@ -47,7 +47,6 @@ run_clair3.sh \
   --bam_fn=downsampling/${ind}_downsampled_mapped_to_curated_flt_downsampled.bam \
   --ref_fn=$reference \
   --threads=48 \
-  --tmpdir ~/tmp \
   --platform="ont" \
   --model_path="${CLAIR3_PATH}/models/${MODEL_NAME}" \
   --output=variants/${ind} \
