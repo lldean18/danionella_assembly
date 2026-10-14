@@ -25,7 +25,7 @@ glnexus_cli \
   --config /gpfs01/home/mbzlld/github/danionella_assembly/popgen_analysis/clair3.yml \
   --threads 32 \
   --trim-uncalled-alleles \
-  /gpfs01/home/mbzlld/data/danionella/popgen/variants/*/*.gvcf.gz > danionella_all_reads.bcf
+  /gpfs01/home/mbzlld/data/danionella/popgen/variants/*/*.uppercase.gvcf.gz > danionella_all_reads.bcf
 
 conda deactivate
 
