@@ -4,7 +4,6 @@
 
 # script to merge and filter variants called from ONT and illumina data
 
-
 # start a session on a compute node
 srun --partition defq --cpus-per-task 2 --mem 20g --time 04:00:00 --pty bash
 
@@ -25,7 +24,7 @@ bcftools merge \
 -Oz -o /gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged.vcf.gz
 
 # filter merged file to remove all sites with missing data
-vcftools --gzvcf /gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged.vcf.gz --max-missing 0.9 --recode --stdout |
+vcftools --gzvcf /gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged.vcf.gz --max-missing 1 --recode --stdout |
 bgzip > /gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged_nomissing.vcf.gz
 
 
