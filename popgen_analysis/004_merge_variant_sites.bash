@@ -16,6 +16,9 @@ module load vcftools-uoneasy/0.1.16-GCC-12.3.0
 bcftools view -v snps -m2 -M2 /gpfs01/home/mbzlld/data/danionella/fish_d/variants/curated_vs_fish_d_reads_flt.vcf.gz \
  -Oz --threads 16 -o /gpfs01/home/mbzlld/data/danionella/fish_d/variants/curated_vs_fish_d_reads_flt_snps.vcf.gz
 
+# index the file
+bcftools index -t /gpfs01/home/mbzlld/data/danionella/fish_d/variants/curated_vs_fish_d_reads_flt_snps.vcf.gz
+bcftools index -t /gpfs01/home/mbzlld/data/danionella/popgen/variants/danionella_all_reads_Q30_DP10_GQ20.vcf.gz
 
 # merge variant files
 bcftools merge \
