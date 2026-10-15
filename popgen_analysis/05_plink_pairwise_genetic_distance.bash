@@ -15,6 +15,7 @@ module load plink-uoneasy/2.00a3.7-foss-2023a
 mkdir -p /gpfs01/home/mbzlld/data/danionella/popgen/plink
 cd /gpfs01/home/mbzlld/data/danionella/popgen/plink
 vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/danionella_all_reads_Q30_DP10_GQ20_SNP_mis0.9.vcf.gz
+vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged_nomissing.vcf.gz
 
 # calculate genetic distances
 plink \
