@@ -18,7 +18,9 @@ source $HOME/.bash_profile
 conda activate iqtree
 mkdir -p /gpfs01/home/mbzlld/data/danionella/popgen/iqtree
 cd /gpfs01/home/mbzlld/data/danionella/popgen/iqtree
-vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/danionella_all_reads_Q30_DP10_GQ20_SNP_mis0.9.vcf.gz
+
+#vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/danionella_all_reads_Q30_DP10_GQ20_SNP_mis0.9.vcf.gz
+vcf=/gpfs01/home/mbzlld/data/danionella/popgen/variants/all_fish_merged_nomissing.vcf.gz
 
 # convert the vcf to phylip format
 python /gpfs01/home/mbzlld/software_bin/vcf2phylip.py -i $vcf
@@ -26,6 +28,7 @@ python /gpfs01/home/mbzlld/software_bin/vcf2phylip.py -i $vcf
 # generate the tree
 iqtree \
     -s $(basename ${vcf%.*.*}).min3.phy \
+    -bb 1000 \
     -m MFP \
     -st DNA \
     -T AUTO
