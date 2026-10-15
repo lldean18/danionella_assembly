@@ -27,12 +27,13 @@ python /gpfs01/home/mbzlld/software_bin/vcf2phylip.py -i $vcf
 
 # generate the tree
 iqtree \
-    -s $(basename ${vcf%.*.*}).min3.phy \
+    -s $(basename ${vcf%.*.*}).min4.phy \
     -bb 1000 \
     -m MFP \
     -st DNA \
     -T AUTO
 
 
+#    -s $(basename ${vcf%.*.*}).min3.phy \
 #    -bb 1000 \
 
