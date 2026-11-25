@@ -37,7 +37,7 @@ mkdir -p kraken2/bracken
 # set variables
 #DBNAME=/gpfs01/home/mbzlld/data/databases/core_nt/k2_core_nt_20251015
 DBNAME=/share/deepseq/matt/Ctenella/kraken_core
-reads=fastqs/?.fastq.gz
+reads=/share/deepseq/danionella/maleFish/ds1777_1.pass.fastq
 
 echo "running k2 to classify $reads"
 
@@ -45,12 +45,12 @@ echo "running k2 to classify $reads"
 k2 classify \
 --db $DBNAME \
 --threads 16 \
---classified-out kraken2/classified/$(basename ${reads%.*.*})_#.fasta \
---unclassified-out kraken2/unclassified/$(basename ${reads%.*.*})_#.fasta \
+--classified-out kraken2/classified/$(basename ${reads%.*})_#.fasta \
+--unclassified-out kraken2/unclassified/$(basename ${reads%.*})_#.fasta \
 --use-names \
---report kraken2/$(basename ${reads%.*.*})_k2_report \
---output kraken2/$(basename ${reads%.*.*})_k2_output \
---log kraken2/$(basename ${reads%.*.*})_k2_log \
+--report kraken2/$(basename ${reads%.*})_k2_report \
+--output kraken2/$(basename ${reads%.*})_k2_output \
+--log kraken2/$(basename ${reads%.*})_k2_log \
 $reads
 
 echo "running braken to calculate abundances for $reads"
@@ -58,9 +58,9 @@ echo "running braken to calculate abundances for $reads"
 # calculate abundances for plotting with bracken
 bracken \
 -d $DBNAME \
--i kraken2/$(basename ${reads%.*.*})_k2_report \
--o kraken2/bracken/$(basename ${reads%.*.*}).bracken.out \
--w kraken2/bracken/$(basename ${reads%.*.*}).breport
+-i kraken2/$(basename ${reads%.*})_k2_report \
+-o kraken2/bracken/$(basename ${reads%.*}).bracken.out \
+-w kraken2/bracken/$(basename ${reads%.*}).breport
 
 # then use the .breport file in the shiny app here to make the plot: https://fbreitwieser.shinyapps.io/pavian/
 
