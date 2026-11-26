@@ -8,9 +8,9 @@
 #SBATCH --partition=hmemq
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=32
 #SBATCH --mem=500g
-#SBATCH --time=48:00:00
+#SBATCH --time=60:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
 
@@ -29,8 +29,11 @@
 source $HOME/.bash_profile
 #conda create --name kraken2 bioconda::kraken2
 conda activate kraken2
+
 #cd /gpfs01/home/mbzlld/data/danionella/males/dc1
 cd /gpfs01/home/mbzlld/data/danionella/males/dc2
+cd /gpfs01/home/mbzlld/data/danionella/fish_B
+
 mkdir -p kraken2/classified
 mkdir -p kraken2/unclassified
 mkdir -p kraken2/bracken
@@ -38,17 +41,19 @@ mkdir -p kraken2/bracken
 # set variables
 #DBNAME=/gpfs01/home/mbzlld/data/databases/core_nt/k2_core_nt_20251015
 DBNAME=/share/deepseq/matt/Ctenella/kraken_core
+
 #reads=/share/deepseq/danionella/maleFish/ds1777_1.pass.fastq
-reads=/share/deepseq/danionella/maleFish/ds1777_2.pass.fastq
+#reads=/share/deepseq/danionella/maleFish/ds1777_2.pass.fastq
+reads=/gpfs01/home/mbzlld/data/danionella/basecalls/FishB_ALL_simplex.fastq
 
 echo "running k2 to classify $reads"
 
 # Classify the reads with the K2 wrapper
 k2 classify \
 --db $DBNAME \
---threads 16 \
---classified-out kraken2/classified/$(basename ${reads%.*})_#.fasta \
---unclassified-out kraken2/unclassified/$(basename ${reads%.*})_#.fasta \
+--threads 32 \
+--classified-out kraken2/classified/$(basename ${reads%.*})_classified.fastq \
+--unclassified-out kraken2/unclassified/$(basename ${reads%.*})_unclassified.fastq \
 --use-names \
 --report kraken2/$(basename ${reads%.*})_k2_report \
 --output kraken2/$(basename ${reads%.*})_k2_output \
