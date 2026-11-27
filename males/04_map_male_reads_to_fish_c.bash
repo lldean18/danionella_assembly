@@ -17,12 +17,13 @@
 source $HOME/.bash_profile
 conda activate minimap2
 
-OUTDIR=/gpfs01/home/mbzlld/data/danionella/males/dc1/bams
+#OUTDIR=/gpfs01/home/mbzlld/data/danionella/males/dc1/bams
+OUTDIR=/gpfs01/home/mbzlld/data/danionella/males/dc2/bams
 cd $OUTDIR
 
 #READS=/share/deepseq/danionella/maleFish/ds1777_1.pass.fastq
-READS=/share/deepseq/danionella/maleFish/ds1777_1.pass_chordata.fastq
-#READS=/share/deepseq/danionella/maleFish/ds1777_2.pass.fastq
+#READS=/share/deepseq/danionella/maleFish/ds1777_1.pass_chordata.fastq
+READS=/share/deepseq/danionella/maleFish/ds1777_2.pass.fastq
 #READS=/share/deepseq/danionella/maleFish/ds1777_2.pass_chordata.fastq.gz
 
 ASSEMBLY=/gpfs01/home/mbzlld/data/danionella/fish_c/fishC_polished_nuclear_curated_no_ptg000061l.fa
