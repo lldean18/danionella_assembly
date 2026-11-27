@@ -19,6 +19,7 @@ conda activate minimap2
 
 #OUTDIR=/gpfs01/home/mbzlld/data/danionella/males/dc1/bams
 OUTDIR=/gpfs01/home/mbzlld/data/danionella/males/dc2/bams
+mkdir -p $OUTDIR
 cd $OUTDIR
 
 #READS=/share/deepseq/danionella/maleFish/ds1777_1.pass.fastq
