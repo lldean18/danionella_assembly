@@ -10,7 +10,7 @@
 #SBATCH --cpus-per-task=96
 #SBATCH --mem=1000g
 #SBATCH --time=140:00:00
-#SBATCH --job-name=MaleFish1_danionella_assembly
+#SBATCH --job-name=MaleFish2_danionella_assembly
 #SBATCH --output=/gpfs01/home/mbzlld/data/danionella/fish_c/hifiasm_2/slurm-%x-%j.out
 
 # setup env
@@ -20,13 +20,13 @@ conda activate hifiasm_0.25.0
 
 ATTEMPT=1
 
-IND=ds1777_1
-OUTDIR=/share/deepseq/danionella/maleFish/ds1777_1/hifiasm_$ATTEMPT
-READS=/share/deepseq/danionella/maleFish/ds1777_1.pass_chordata.fastq
+#IND=ds1777_1
+#OUTDIR=/share/deepseq/danionella/maleFish/ds1777_1/hifiasm_$ATTEMPT
+#READS=/share/deepseq/danionella/maleFish/ds1777_1.pass_chordata.fastq
 
-#IND=ds1777_2
-#OUTDIR=/share/deepseq/danionella/maleFish/ds1777_2/hifiasm_$ATTEMPT
-#READS=/share/deepseq/danionella/maleFish/ds1777_2.pass_chordata.fastq.gz
+IND=ds1777_2
+OUTDIR=/share/deepseq/danionella/maleFish/ds1777_2/hifiasm_$ATTEMPT
+READS=/share/deepseq/danionella/maleFish/ds1777_2.pass_chordata.fastq.gz
 
 mkdir -p $OUTDIR
 cd $OUTDIR
